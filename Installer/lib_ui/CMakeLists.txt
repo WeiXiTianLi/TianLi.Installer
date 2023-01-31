@@ -1,6 +1,8 @@
 add_library(lib_ui STATIC)
 add_library(tianli::lib_ui ALIAS lib_ui)
-
+if(MSVC)
+    set_property(TARGET lib_ui PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+endif()
 
 set(Qt5_DIR "E:/Qt/5.15.7/msvc2019_64_static/lib/cmake/Qt5")
 find_package(Qt5 COMPONENTS Core Gui Widgets REQUIRED)

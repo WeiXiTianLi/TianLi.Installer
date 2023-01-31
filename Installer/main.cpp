@@ -1,8 +1,10 @@
 #include <iostream>
 #include "lib_ui/widget/rounded_rectangle.h"
+#include "QApplication"
 
-int main() {
-    std::cout << "Hello, World!" << std::endl;
-    tianli::rounded_rectangle rounded_rectangle;
-    return 0;
+int main(int argc, char *argv[]) {
+    QApplication a(argc, argv);
+    tianli::rounded_rectangle w;
+    w.show();
+    return a.exec();
 }
