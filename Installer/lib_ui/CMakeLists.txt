@@ -2,6 +2,7 @@ add_library(lib_ui STATIC ${CMAKE_CURRENT_SOURCE_DIR}/qrc/tianli.qrc)
 add_library(tianli::lib_ui ALIAS lib_ui)
 if(MSVC)
     set_property(TARGET lib_ui PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+    #set_property(TARGET tianli::lib_ui PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 endif()
 
 set(Qt5_DIR "E:/Qt/5.15.7/msvc2019_64_static/lib/cmake/Qt5")
@@ -26,9 +27,6 @@ qt5_wrap_ui(UI_FILES
 )
 qt5_add_resources(QRC_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/qrc/tianli.qrc
-        #${CMAKE_CURRENT_SOURCE_DIR}/tianli_widget.qrc
-        #${CMAKE_CURRENT_SOURCE_DIR}/widget/rounded_rectangle.qrc
-        #${CMAKE_CURRENT_SOURCE_DIR}/common/time_line_label/time_line_label.qrc
 )
 
 SOURCE_GROUP("Resource Files" FILES ${QRC_FILES})
@@ -37,6 +35,9 @@ target_sources(lib_ui
         PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/qrc/tianli.qrc
 
+        ${CMAKE_CURRENT_SOURCE_DIR}/tianli_widget.ui
+        ${CMAKE_CURRENT_SOURCE_DIR}/widget/rounded_rectangle.ui
+        ${CMAKE_CURRENT_SOURCE_DIR}/common/time_line_label/time_line_label.ui
         ${CMAKE_CURRENT_SOURCE_DIR}/tianli_widget.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tianli_widget.h
         ${CMAKE_CURRENT_SOURCE_DIR}/widget/rounded_rectangle.cpp

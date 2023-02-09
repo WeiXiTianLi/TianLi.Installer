@@ -16,7 +16,16 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 
 add_subdirectory(lib_ui)
 
-target_sources(Installer PRIVATE main.cpp resource/resource.rc resource/app_info.rc  lib_ui/qrc/tianli.qrc      ${UI_FILES} ${QRC_FILES})
+qt5_wrap_ui(UI_FILES
+        ${CMAKE_CURRENT_SOURCE_DIR}/lib_ui/tianli_widget.ui
+        ${CMAKE_CURRENT_SOURCE_DIR}/lib_ui/widget/rounded_rectangle.ui
+        ${CMAKE_CURRENT_SOURCE_DIR}/lib_ui/common/time_line_label/time_line_label.ui
+        )
+qt5_add_resources(QRC_FILES
+        ${CMAKE_CURRENT_SOURCE_DIR}/lib_ui/qrc/tianli.qrc
+        )
+
+target_sources(Installer PRIVATE main.cpp resource/resource.rc resource/app_info.rc  lib_ui/qrc/tianli.qrc  ${UI_FILES} ${QRC_FILES})
 
 target_link_libraries(Installer
         PRIVATE

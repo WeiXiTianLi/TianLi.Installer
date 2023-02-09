@@ -108,7 +108,7 @@
                 </rect>
             </property>
             <property name="styleSheet">
-                <string notr="true">background-color:rgb(255, 128, 255);
+                <string notr="true">background-color:rgb(255, 255, 255);
                     border:none;
                     border-radius:5px;
                 </string>
