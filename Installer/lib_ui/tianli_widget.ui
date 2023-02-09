@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+    <class>tianli::tianli_widget</class>
+    <widget class="QWidget" name="tianli::tianli_widget">
+        <property name="geometry">
+            <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>740</width>
+                <height>424</height>
+            </rect>
+        </property>
+        <property name="windowTitle">
+            <string>天理安装器</string>
+        </property>
+        <property name="windowIcon">
+            <iconset resource="tianli.qrc">
+                <normaloff>:/logo/resource/icon.png</normaloff>
+                :/logo/resource/icon.png
+            </iconset>
+        </property>
+        <property name="styleSheet">
+            <string notr="true"/>
+        </property>
+
+        <widget class="QLabel" name="label_MainImage">
+            <property name="geometry">
+                <rect>
+                    <x>10</x>
+                    <y>10</y>
+                    <width>345</width>
+                    <height>404</height>
+                </rect>
+            </property>
+            <property name="styleSheet">
+                <string notr="true">background-image:url(:/GenshinImpact_TianLi_Setup/resource/Group 370 (2).png);
+                    border:none;
+                    border-radius:5px;
+                </string>
+            </property>
+            <property name="text">
+                <string/>
+            </property>
+            <property name="buddy">
+                <cstring>pushButton_UI_Mini</cstring>
+            </property>
+        </widget>
+        <widget class="QPushButton" name="pushButton_UI_Close">
+            <property name="geometry">
+                <rect>
+                    <x>690</x>
+                    <y>20</y>
+                    <width>32</width>
+                    <height>32</height>
+                </rect>
+            </property>
+            <property name="styleSheet">
+                <string notr="true">QPushButton{
+                    background-image:url(:/sys_button/resource/sys_button/exit.png);
+                    color:rgb(220, 188, 96);
+                    border-radius:0px;
+                    }
+                    QPushButton:hover {
+                    background-image:url(:/sys_button/resource/sys_button/exit_hover.png);
+                    }
+                    QPushButton:pressed {
+                    background-image:url(:/sys_button/resource/sys_button/exit_click.png);
+                    }</string>
+            </property>
+            <property name="text">
+                <string/>
+            </property>
+        </widget>
+
+        <widget class="QPushButton" name="pushButton_UI_Mini">
+            <property name="geometry">
+                <rect>
+                    <x>650</x>
+                    <y>20</y>
+                    <width>32</width>
+                    <height>32</height>
+                </rect>
+            </property>
+            <property name="styleSheet">
+                <string notr="true">QPushButton{
+                    background-image:url(:/sys_button/resource/sys_button/mini.png);
+                    color:rgb(220, 188, 96);
+                    border-radius:0px;
+                    }
+                    QPushButton:hover {
+                    background-image:url(:/sys_button/resource/sys_button/mini_hover.png);
+                    }
+                    QPushButton:pressed {
+                    background-image:url(:/sys_button/resource/sys_button/exit_click.png);
+                    }</string>
+            </property>
+            <property name="text">
+                <string/>
+            </property>
+        </widget>
+        <widget class="QLabel" name="label_MainShadow_A">
+            <property name="geometry">
+                <rect>
+                    <x>10</x>
+                    <y>10</y>
+                    <width>721</width>
+                    <height>404</height>
+                </rect>
+            </property>
+            <property name="styleSheet">
+                <string notr="true">background-color:rgb(255, 128, 255);
+                    border:none;
+                    border-radius:5px;
+                </string>
+            </property>
+            <property name="text">
+                <string/>
+            </property>
+        </widget>
+        <zorder>label_MainShadow</zorder>
+        <zorder>label_MainShadow_A</zorder>
+        <zorder>label_MainShadow_B</zorder>
+        <zorder>label_Satellite_Orbit</zorder>
+        <zorder>pushButton_UI_Close</zorder>
+        <zorder>pushButton_UI_Mini</zorder>
+        <zorder>label_Star</zorder>
+        <zorder>label_Title</zorder>
+        <zorder>stackedWidget</zorder>
+        <zorder>label_MainImage</zorder>
+    </widget>
+    <resources>
+        <include location="tianli.qrc"/>
+    </resources>
+    <connections/>
+</ui>

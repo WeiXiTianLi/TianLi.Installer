@@ -1,4 +1,4 @@
-add_executable(Installer WIN32 MACOSX_BUNDLE)
+add_executable(Installer WIN32 MACOSX_BUNDLE resource/resource.h lib_ui/qrc/tianli.qrc)
 # 静态链接Qt
 if(MSVC)
     set_property(TARGET Installer PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
@@ -16,7 +16,7 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 
 add_subdirectory(lib_ui)
 
-target_sources(Installer PRIVATE main.cpp)
+target_sources(Installer PRIVATE main.cpp resource/resource.rc resource/app_info.rc  lib_ui/qrc/tianli.qrc      ${UI_FILES} ${QRC_FILES})
 
 target_link_libraries(Installer
         PRIVATE

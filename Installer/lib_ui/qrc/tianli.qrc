@@ -1,0 +1,21 @@
+<RCC>
+    <qresource prefix="/tianli">
+        <file>resource/bg.png</file>
+    </qresource>
+    <qresource prefix="/sys_button">
+        <file>resource/sys_button/exit.png</file>
+        <file>resource/sys_button/exit_hover.png</file>
+        <file>resource/sys_button/exit_click.png</file>
+        <file>resource/sys_button/mini.png</file>
+        <file>resource/sys_button/mini_hover.png</file>
+        <file>resource/sys_button/mini_click.png</file>
+        <file>resource/bg_big_star.png</file>
+        <file>resource/bg_big_star_b.png</file>
+        <file>resource/Vector.png</file>
+    </qresource>
+    <qresource prefix="/font"/>
+    <qresource prefix="/logo">
+        <file>resource/icon.ico</file>
+        <file>resource/icon.png</file>
+    </qresource>
+</RCC>
