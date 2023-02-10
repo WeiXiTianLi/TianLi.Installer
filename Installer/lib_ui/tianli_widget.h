@@ -7,6 +7,8 @@
 
 #include <QWidget>
 
+class QGraphicsDropShadowEffect;
+class QPropertyAnimation;
 namespace tianli {
     QT_BEGIN_NAMESPACE
     namespace Ui { class tianli_widget; }
@@ -22,6 +24,32 @@ namespace tianli {
 
     private:
         Ui::tianli_widget *ui;
+
+    private:
+        QGraphicsDropShadowEffect* mainShadow_A;
+        QGraphicsDropShadowEffect* mainShadow_B;
+        QGraphicsDropShadowEffect* mainShadow;
+        QPropertyAnimation* mainShadowAnimation;
+        QPropertyAnimation* exitAnimation;
+        QPropertyAnimation* exitAnimation_hide;
+    private:
+        QPoint m_Press;
+        QPoint m_Move;
+        bool leftBtnClk = false;
+        void mousePressEvent(QMouseEvent* event) Q_DECL_OVERRIDE;
+        void mouseReleaseEvent(QMouseEvent* event) Q_DECL_OVERRIDE;
+        void mouseMoveEvent(QMouseEvent* event) Q_DECL_OVERRIDE;
+        void closeEvent(QCloseEvent* event) Q_DECL_OVERRIDE;
+    private:
+        bool eventFilter(QObject* object, QEvent* event) Q_DECL_OVERRIDE;
+    private slots:
+        void pushButton_UI_Close();
+        void pushButton_UI_Mini();
+        void pushButton_FastInstall();
+        void pushButton_CustomizeInstall();
+        void pushButton_Finishing_Cancel();
+        void pushButton_Finished_Run();
+        void pushButton_Finished_Exit();
     };
 } // tianli
 
