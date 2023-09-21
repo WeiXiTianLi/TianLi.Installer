@@ -50,6 +50,12 @@ namespace tianli {
         void pushButton_Finishing_Cancel();
         void pushButton_Finished_Run();
         void pushButton_Finished_Exit();
+    signals:
+        void signal_fast_install();
+        void signal_customize_install();
+        void signal_finishing_cancel();
+        void signal_finished_run();
+        void signal_finished_exit();
     };
 } // tianli
 

@@ -158,6 +158,7 @@ namespace tianli {
         ui->label_MainShadow_B->hide();
         ui->pushButton_UI_Close->hide();
         ui->pushButton_UI_Mini->hide();
+        ui->label_Satellite_Orbit->hide();
 
         // 渐渐缩小
         exitAnimation = new QPropertyAnimation(ui->label_MainShadow, "geometry");
