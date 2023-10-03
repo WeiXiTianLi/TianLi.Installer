@@ -5,7 +5,7 @@ namespace tianli
 {
     namespace core
     {
-        std::optional<std::string> download(std::string_view url, std::filesystem::path file, std::function<void(int, int)> progress);
+        std::optional<std::string> download(std::string_view url, std::filesystem::path file, std::function<void(int, int)> progress)
         {
             auto dir = file.parent_path();
             if (!std::filesystem::exists(dir))

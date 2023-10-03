@@ -1,8 +1,6 @@
 #include "decompression.h"
 
-// #include <libzip/libzip.h>
-#include <zlib.h>
-#include <zip.h>
+// #include <zlib.h>
 
 namespace tianli
 {
@@ -37,7 +35,8 @@ namespace tianli
             auto file_name = file.filename().string();
             auto target_dir_name = target_dir.filename().string();
             auto target_dir_parent = target_dir.parent_path().string();
-            auto command = fmt::format("powershell.exe -Command \"& {{Add-Type -AssemblyName System.IO.Compression.FileSystem; [System.IO.Compression.ZipFile]::ExtractToDirectory('{}', '{}');}}\"", file_name, target_dir_name);
+            // auto command = fmt::format("powershell.exe -Command \"& {{Add-Type -AssemblyName System.IO.Compression.FileSystem; [System.IO.Compression.ZipFile]::ExtractToDirectory('{}', '{}');}}\"", file_name, target_dir_name);
+            auto command = "powershell.exe -Command \"& {Add-Type -AssemblyName System.IO.Compression.FileSystem; [System.IO.Compression.ZipFile]::ExtractToDirectory('" + file_name + "', '" + target_dir_name + "');}\"";
             auto res = std::system(command.c_str());
             if (res != 0)
             {

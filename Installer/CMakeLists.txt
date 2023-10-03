@@ -34,21 +34,21 @@ set_target_properties(Installer  PROPERTIES COMPILE_FLAGS "/MT")
 
 
 # cpr
-include(FetchContent)
-FetchContent_Declare(cpr GIT_REPOSITORY https://github.com/libcpr/cpr.git
-                         GIT_TAG 1.10.4) 
-FetchContent_MakeAvailable(cpr)
-# spdlog
-FetchContent_Declare(spdlog GIT_REPOSITORY https://github.com/gabime/spdlog.git
-                            GIT_TAG v1.12.0) 
-FetchContent_MakeAvailable(spdlog)
+#include(FetchContent)
+#FetchContent_Declare(cpr GIT_REPOSITORY https://github.com/libcpr/cpr.git
+#                         GIT_TAG 1.10.4) 
+#FetchContent_MakeAvailable(cpr)
+## spdlog
+#FetchContent_Declare(spdlog GIT_REPOSITORY https://github.com/gabime/spdlog.git
+#                            GIT_TAG v1.12.0) 
+#FetchContent_MakeAvailable(spdlog)
 
 # qt
 target_link_libraries(Installer PRIVATE Qt5::Core Qt5::Gui Qt5::Widgets)
 # cpr
-target_link_libraries(Installer PRIVATE cpr::cpr)
+#target_link_libraries(Installer PRIVATE cpr::cpr)
 # spdlog
-target_link_libraries(Installer PRIVATE spdlog::spdlog spdlog::spdlog_header_only)
+#target_link_libraries(Installer PRIVATE spdlog::spdlog spdlog::spdlog_header_only)
 
 target_link_libraries(Installer PRIVATE
         tianli::lib_ui
