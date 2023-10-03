@@ -1,7 +1,10 @@
 cmake_minimum_required(VERSION 3.23)
 
+set(ThridPatryDir ${CMAKE_SOURCE_DIR}/third_party)
+
 include(cmake/version.cmake)
 tianli_installer_parse_version(config/version)
+
 
 message (STATUS "TianLi.Installer version: ${tianli_installer_version_cmake}")
 

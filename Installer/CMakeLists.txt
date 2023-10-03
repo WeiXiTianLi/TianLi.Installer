@@ -1,6 +1,7 @@
 add_executable(Installer)
 
-set(Qt5_DIR "C:/Qt/5.15.7/msvc2019_x64_static/lib/cmake/Qt5")
+set(Qt5VER "qt-5.15.2-lite-release-static")
+set(Qt5_DIR "${ThridPatryDir}/${Qt5VER}/lib/cmake/Qt5")
 find_package(Qt5 COMPONENTS Core Gui Widgets REQUIRED)
 set(CMAKE_PREFIX_PATH {Qt5_DIR})
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
