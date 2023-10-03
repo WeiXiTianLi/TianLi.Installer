@@ -1,14 +1,33 @@
 add_library(lib_core STATIC)
 add_library(tianli::lib_core ALIAS lib_core)
 
-find_package(cpr CONFIG REQUIRED)
-target_link_libraries(lib_core PRIVATE cpr::cpr)
-find_package(libzippp CONFIG REQUIRED)
-target_link_libraries(lib_core PRIVATE libzippp::libzippp)
-find_package(nlohmann_json CONFIG REQUIRED)
-target_link_libraries(lib_core PRIVATE nlohmann_json::nlohmann_json)
-find_package(fmt CONFIG REQUIRED)
-target_link_libraries(lib_core PRIVATE fmt::fmt)
-find_package(spdlog CONFIG REQUIRED)
-target_link_libraries(lib_core PRIVATE spdlog::spdlog_header_only)
+
+set(BUILD_SHARED_LIBS OFF)
+
+
+# 设置为C++17
+set(CMAKE_CXX_STANDARD 20)
+if (CMAKE_VERSION VERSION_GREATER 3.12)
+  set_property(TARGET lib_core PROPERTY CXX_STANDARD 20)
+endif()
+
+# 设置UTF-8编码
+add_definitions(-DUNICODE -D_UNICODE)
+# msvc编译器设置utf-8编码
+if (MSVC)
+    add_compile_options("/utf-8")
+    # 设置编译运行时为静态链接
+    set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+endif ()
+
+
+add_subdirectory(core_decompression)
+add_subdirectory(core_download)
+
+
+target_sources(lib_core
+PRIVATE
+    installer.core.h
+    installer.core.cpp
+)
 
