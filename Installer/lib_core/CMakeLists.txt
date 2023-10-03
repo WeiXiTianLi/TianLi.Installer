@@ -23,18 +23,8 @@ endif ()
 
 add_subdirectory(core_decompression)
 add_subdirectory(core_download)
-
-#include(FetchContent)
-## cpr
-#FetchContent_Declare(cpr GIT_REPOSITORY https://github.com/GengGode/cpr
-#    GIT_TAG master)
-#FetchContent_MakeAvailable(cpr)
-#target_link_libraries(lib_core PRIVATE cpr::cpr)
-## zlib
-#FetchContent_Declare(zlib GIT_REPOSITORY https://github.com/madler/zlib
-#    GIT_TAG        v1.2.11)
-#FetchContent_MakeAvailable(zlib)
-#target_link_libraries(lib_core PRIVATE zlibstatic)
+add_subdirectory(core_install)
+add_subdirectory(core_registration)
 
 target_sources(lib_core
 PRIVATE
@@ -43,5 +33,10 @@ PUBLIC
     installer.core.h
 )
 
-target_include_directories(lib_core PRIVATE tianli::lib_core::decompression tianli::lib_core::download)
+target_include_directories(lib_core PRIVATE 
+    tianli::lib_core::decompression 
+    tianli::lib_core::download
+    tianli::lib_core::install
+    tianli::lib_core::registration
+)
 

@@ -1,6 +1,8 @@
 #include "decompression.h"
 
 // #include <zlib.h>
+#include <zlib.h>
+#include "unzip.h"
 
 namespace tianli
 {
@@ -20,16 +22,60 @@ namespace tianli
             {
                 return std::nullopt;
             }
-#ifdef ZLIB_H_
+#ifdef _unz64_H
             // zlib 解压缩 zip
             auto file_name = file.string();
             auto target_dir_name = target_dir.string();
 
-            auto zip = zip_open(file_name.c_str(), 0, nullptr);
-            if (zip == nullptr)
+            unzFile uf = unzOpen64(file_name.c_str());
+            if (uf == NULL)
             {
                 return std::nullopt;
             }
+            unz_global_info64 gi;
+            if (unzGetGlobalInfo64(uf, &gi) != UNZ_OK)
+            {
+                unzClose(uf);
+                return std::nullopt;
+            }
+            uLong i;
+            for (i = 0; i < gi.number_entry; ++i)
+            {
+                unz_file_info64 file_info;
+                char filename[256];
+                if (unzGetCurrentFileInfo64(uf, &file_info, filename, sizeof(filename), NULL, 0, NULL, 0) != UNZ_OK)
+                {
+                    unzClose(uf);
+                    return std::nullopt;
+                }
+                if (unzOpenCurrentFile(uf) != UNZ_OK)
+                {
+                    unzClose(uf);
+                    return std::nullopt;
+                }
+                std::filesystem::path file_path = target_dir / filename;
+                if (file_path.filename().string().empty())
+                {
+                    unzCloseCurrentFile(uf);
+                    continue;
+                }
+                if (std::filesystem::exists(file_path))
+                {
+                    std::filesystem::remove(file_path);
+                }
+                std::filesystem::create_directories(file_path.parent_path());
+                std::ofstream file_stream(file_path, std::ios::binary);
+                char buf[4096];
+                int read;
+                while ((read = unzReadCurrentFile(uf, buf, sizeof(buf))) > 0)
+                {
+                    file_stream.write(buf, read);
+                }
+                file_stream.close();
+                unzCloseCurrentFile(uf);
+                unzGoToNextFile(uf);
+            }
+
 #else
             // 解压缩zip
             auto file_name = file.filename().string();
