@@ -80,6 +80,8 @@ namespace tianli {
         connect(ui->pushButton_Finished_Exit, &QPushButton::clicked, this, &tianli_widget::pushButton_Finished_Exit);
 
         ui->stackedWidget->setCurrentIndex(1);
+
+        this->installEventFilter(this);
     }
 
     tianli_widget::~tianli_widget() {
