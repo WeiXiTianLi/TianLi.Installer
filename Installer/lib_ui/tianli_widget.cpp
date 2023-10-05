@@ -12,15 +12,16 @@
 #include <QFocusEvent>
 #include <QPropertyAnimation>
 #include <QGraphicsDropShadowEffect>
+#include <QDebug>
 
-namespace tianli {
-    tianli_widget::tianli_widget(QWidget *parent) :
-            QWidget(parent), ui(new Ui::tianli_widget) {
+namespace tianli
+{
+    tianli_widget::tianli_widget(QWidget *parent) : QWidget(parent), ui(new Ui::tianli_widget)
+    {
         ui->setupUi(this);
 
         this->setWindowFlags(Qt::FramelessWindowHint);
         this->setAttribute(Qt::WA_TranslucentBackground, true);
-
 
         mainShadow = new QGraphicsDropShadowEffect();
         mainShadow->setOffset(0, 0);
@@ -68,8 +69,8 @@ namespace tianli {
         timeLineLabel_4->setGeometry(102, y + 31 * 3, 15, 124);
         timeLineLabel_4->setEnd(true);
 
-        //connect(ui->pushButton_UI_Close, &QPushButton::clicked, this, &tianli_widget::close);
-        //connect(ui->pushButton_UI_Mini, &QPushButton::clicked, this, &tianli_widget::showMinimized);
+        // connect(ui->pushButton_UI_Close, &QPushButton::clicked, this, &tianli_widget::close);
+        // connect(ui->pushButton_UI_Mini, &QPushButton::clicked, this, &tianli_widget::showMinimized);
 
         connect(ui->pushButton_UI_Close, &QPushButton::clicked, this, &tianli_widget::pushButton_UI_Close);
         connect(ui->pushButton_UI_Mini, &QPushButton::clicked, this, &tianli_widget::pushButton_UI_Mini);
@@ -84,38 +85,41 @@ namespace tianli {
         this->installEventFilter(this);
     }
 
-    tianli_widget::~tianli_widget() {
+    tianli_widget::~tianli_widget()
+    {
         delete ui;
     }
 
-
-    void tianli_widget::mousePressEvent(QMouseEvent* event)
+    void tianli_widget::mousePressEvent(QMouseEvent *event)
     {
         if (event->button() == Qt::LeftButton &&
-            ui->label_MainShadow->frameRect().contains(event->globalPos() - this->frameGeometry().topLeft())) {
+            ui->label_MainShadow->frameRect().contains(event->globalPos() - this->frameGeometry().topLeft()))
+        {
             m_Press = event->globalPos();
             leftBtnClk = true;
         }
         event->ignore();
     }
 
-    void tianli_widget::mouseReleaseEvent(QMouseEvent* event)
+    void tianli_widget::mouseReleaseEvent(QMouseEvent *event)
     {
-        if (event->button() == Qt::LeftButton) {
+        if (event->button() == Qt::LeftButton)
+        {
             leftBtnClk = false;
         }
         event->ignore();
     }
-    void tianli_widget::mouseMoveEvent(QMouseEvent* event)
+    void tianli_widget::mouseMoveEvent(QMouseEvent *event)
     {
-        if (leftBtnClk) {
+        if (leftBtnClk)
+        {
             m_Move = event->globalPos();
             this->move(this->pos() + m_Move - m_Press);
             m_Press = m_Move;
         }
         event->ignore();
     }
-    bool tianli_widget::eventFilter(QObject* object, QEvent* event)
+    bool tianli_widget::eventFilter(QObject *object, QEvent *event)
     {
         if (event->type() == QEvent::ActivationChange)
         {
@@ -123,11 +127,13 @@ namespace tianli {
             {
                 // 焦点转移
                 mainShadow_B->setEnabled(false);
+                qDebug() << "失去焦点";
             }
             else
             {
-                //焦点转进
+                // 焦点转进
                 mainShadow_B->setEnabled(true);
+                qDebug() << "获得焦点";
             }
         }
         if (event->type() == QEvent::Enter)
@@ -135,17 +141,19 @@ namespace tianli {
             mainShadowAnimation->stop();
             mainShadowAnimation->setEndValue("#FF1C1C");
             mainShadowAnimation->start();
+            qDebug() << "进入";
         }
         if (event->type() == QEvent::Leave)
         {
             mainShadowAnimation->stop();
             mainShadowAnimation->setEndValue("#DDDDDD");
             mainShadowAnimation->start();
+            qDebug() << "离开";
         }
         return QWidget::eventFilter(object, event);
     }
 
-    void tianli_widget::closeEvent(QCloseEvent* event)
+    void tianli_widget::closeEvent(QCloseEvent *event)
     {
         event->accept();
     }
@@ -153,7 +161,7 @@ namespace tianli {
     {
         ui->stackedWidget->setCurrentIndex(3);
 
-        //ui.label_MainShadow->hide();
+        // ui.label_MainShadow->hide();
 
         ui->label_MainShadow_A->hide();
         ui->label_MainShadow_B->hide();
@@ -164,25 +172,18 @@ namespace tianli {
         // 渐渐缩小
         exitAnimation = new QPropertyAnimation(ui->label_MainShadow, "geometry");
         exitAnimation->setDuration(200);
-        exitAnimation->setEndValue(QRect(10+50 , 20+50, 720-100, 384-100));
-        connect(exitAnimation, &QPropertyAnimation::valueChanged, [=]() {
-            this->update();
-        });
-        connect(exitAnimation, &QPropertyAnimation::finished, [=]() {
-            this->close();
-        });
+        exitAnimation->setEndValue(QRect(10 + 50, 20 + 50, 720 - 100, 384 - 100));
+        connect(exitAnimation, &QPropertyAnimation::valueChanged, [=]()
+                { this->update(); });
+        connect(exitAnimation, &QPropertyAnimation::finished, [=]()
+                { this->close(); });
         exitAnimation->start();
         // 渐渐隐藏
         exitAnimation_hide = new QPropertyAnimation(ui->label_MainShadow, "windowOpacity");
 
-
-
-
         update();
 
-
-        //this->close();
-
+        // this->close();
     }
 
     void tianli_widget::pushButton_UI_Mini()
@@ -193,7 +194,6 @@ namespace tianli {
     void tianli_widget::pushButton_FastInstall()
     {
         ui->stackedWidget->setCurrentIndex(1);
-
     }
 
     void tianli_widget::pushButton_CustomizeInstall()
