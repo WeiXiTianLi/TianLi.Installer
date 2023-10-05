@@ -4,9 +4,9 @@ add_library(tianli::lib_core::decompression ALIAS lib_core_decompression)
 
 include(FetchContent)
 # zlib
-FetchContent_Declare(zlib GIT_REPOSITORY https://github.com/madler/zlib
-    GIT_TAG        v1.2.11)
-FetchContent_MakeAvailable(zlib)
+FetchContent_Declare(minizip GIT_REPOSITORY https://github.com/zlib-ng/minizip-ng
+    GIT_TAG        4.0.1)
+FetchContent_MakeAvailable(minizip)
 target_link_libraries(lib_core_decompression PRIVATE zlibstatic)
 # include zlib
 target_include_directories(lib_core_decompression PUBLIC ${zlib_SOURCE_DIR})
