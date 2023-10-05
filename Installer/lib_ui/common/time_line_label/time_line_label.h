@@ -17,6 +17,7 @@ namespace tianli {
 
     public:
         explicit time_line_label(QWidget *parent = nullptr);
+        explicit time_line_label(QString step_name, QWidget *parent = nullptr);
 
         ~time_line_label() override;
 
@@ -33,19 +34,20 @@ namespace tianli {
     private:
         QTimer *timer;
     private:
-        // Ò»Ð©²ÎÊý ÊôÐÔ
+        // Ò»Ð©ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-        // ÊÇ·ñ±»Ñ¡ÖÐ
+        // ï¿½Ç·ï¿½Ñ¡ï¿½ï¿½
         bool m_isChecked = false;
-        // ÊÇ·ñ¼¤»î
+        // ï¿½Ç·ñ¼¤»ï¿½
         bool m_isAction = false;
-        // ÊÇ·ñÊÇµÚÒ»¸ö
+        // ï¿½Ç·ï¿½ï¿½Çµï¿½Ò»ï¿½ï¿½
         bool m_isBegin = false;
-        // ÊÇ·ñÊÇ×îºóÒ»¸ö
+        // ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
         bool m_isEnd = false;
-        // ½Ç¶È
+        // ï¿½Ç¶ï¿½
         int alpha = 0;
     public:
+        void setStepName(QString name);
         void setAction(bool value);
         void setChecked(bool value);
         void setBegin(bool value);
@@ -57,7 +59,7 @@ namespace tianli {
     signals:
         void checkChange();
     private:
-        // Ò»Ð©²ÎÊý »æÍ¼ÓÃ
+        // Ò»Ð©ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Í¼ï¿½ï¿½
         float m_c_Width = 21;
         float m_c_Height = 31;
         float m_c_MiniD = 7;

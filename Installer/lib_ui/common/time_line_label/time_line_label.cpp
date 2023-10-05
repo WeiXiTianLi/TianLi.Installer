@@ -11,9 +11,9 @@
 #include <QTimer>
 #include <QDebug>
 
-namespace tianli {
-    time_line_label::time_line_label(QWidget *parent) :
-            QWidget(parent), ui(new Ui::time_line_label) {
+{
+    time_line_label::time_line_label(QWidget *parent) : QWidget(parent), ui(new Ui::time_line_label)
+    {
         ui->setupUi(this);
 
         timer = new QTimer(this);
@@ -22,8 +22,20 @@ namespace tianli {
 
         UI_NoCheck();
     }
+    time_line_label::time_line_label(QString step_name, QWidget *parent) : QWidget(parent), ui(new Ui::time_line_label)
+    {
+        ui->setupUi(this);
 
-    time_line_label::~time_line_label() {
+        timer = new QTimer(this);
+        connect(timer, &QTimer::timeout, this, &time_line_label::timeout);
+        timer->setInterval(100);
+
+        UI_NoCheck();
+        setStepName(step_name);
+    }
+
+    time_line_label::~time_line_label()
+    {
         delete ui;
     }
 
@@ -126,6 +138,11 @@ namespace tianli {
         ui->label_ProgressBackground->show();
         ui->label_ProgressBar->show();
         timer->start();
+    }
+
+    void time_line_label::setStepName(QString name)
+    {
+        ui->label_Title->setText(name);
     }
 
     void time_line_label::setAction(bool value)
