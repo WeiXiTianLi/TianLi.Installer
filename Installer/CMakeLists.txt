@@ -54,3 +54,5 @@ target_link_libraries(Installer PRIVATE
         tianli::lib_ui
         #tianli::lib_core
         )
+# set_target_properties(Installer  PROPERTIES 
+#         OUTPUT_NAME "维系天理-安装器" SUFFIX ".exe")

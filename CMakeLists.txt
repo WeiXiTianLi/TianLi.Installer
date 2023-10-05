@@ -15,4 +15,9 @@ project(TianLi.Installer
         HOMEPAGE_URL "http://www.weixitianli.com/"
 )
 
+# msvc utf-8
+if (MSVC)
+    add_compile_options(/utf-8)
+endif()
+
 add_subdirectory(Installer)
