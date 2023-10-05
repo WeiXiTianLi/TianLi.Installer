@@ -46,27 +46,26 @@ namespace tianli {
 
         int y = 51;
 
-        time_line_label* timeLineLabel_1 = new time_line_label();
+        time_line_label *timeLineLabel_1 = new time_line_label("下载");
         timeLineLabel_1->setParent(ui->stackedWidget->widget(1));
         timeLineLabel_1->setGeometry(102, y, 15, 124);
         timeLineLabel_1->setAction(true);
         timeLineLabel_1->setBegin(true);
 
-        time_line_label* timeLineLabel_2 = new time_line_label();
+        time_line_label *timeLineLabel_2 = new time_line_label("解压");
         timeLineLabel_2->setParent(ui->stackedWidget->widget(1));
-        timeLineLabel_2->setGeometry(102, y + 31 *1, 15, 124);
+        timeLineLabel_2->setGeometry(102, y + 31 * 1, 15, 124);
         timeLineLabel_2->setAction(true);
 
-
-        time_line_label* timeLineLabel_3 = new time_line_label();
+        time_line_label *timeLineLabel_3 = new time_line_label("安装");
         timeLineLabel_3->setParent(ui->stackedWidget->widget(1));
-        timeLineLabel_3->setGeometry(102, y + 31 *2, 15, 124);
+        timeLineLabel_3->setGeometry(102, y + 31 * 2, 15, 124);
         timeLineLabel_3->setAction(true);
         timeLineLabel_3->setChecked(true);
 
-        time_line_label* timeLineLabel_4 = new time_line_label();
+        time_line_label *timeLineLabel_4 = new time_line_label("注册");
         timeLineLabel_4->setParent(ui->stackedWidget->widget(1));
-        timeLineLabel_4->setGeometry(102, y+31*3, 15, 124);
+        timeLineLabel_4->setGeometry(102, y + 31 * 3, 15, 124);
         timeLineLabel_4->setEnd(true);
 
         //connect(ui->pushButton_UI_Close, &QPushButton::clicked, this, &tianli_widget::close);
