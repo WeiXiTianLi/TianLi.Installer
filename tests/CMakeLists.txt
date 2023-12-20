@@ -8,10 +8,13 @@ else()
 endif()
 
 if(MSVC)
-    #cpp20
+    # cpp20
     add_compile_options(/std:c++latest)
+    # c99
+    add_compile_options(/std:c99)
 else()
-    add_compile_options(-std=c++2a)
+    # add_compile_options(-std=c++2a)
+
 endif()
 
 if (BUILD_TESTS)
