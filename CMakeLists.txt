@@ -1,5 +1,14 @@
 cmake_minimum_required(VERSION 3.23)
 
+set(BUILD_TESTS OFF CACHE BOOL "Build tests")
+set(BUILD_BENCHMARK OFF CACHE BOOL "Build benchmark")
+set(BUILD_TOOLS OFF CACHE BOOL "Build tools")
+set(BUILD_EXAMPLES OFF CACHE BOOL "Build examples")
+
+#--------------------------------------------------
+set(BUILD_TEST ON)
+
+
 set(ThridPatryDir ${CMAKE_SOURCE_DIR}/third_party)
 
 include(cmake/utils.cmake)

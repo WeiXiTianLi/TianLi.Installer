@@ -1,6 +1,4 @@
 
-set(BUILD_TESTS ON CACHE BOOL "Build tests")
-
 if(MSVC)
     add_compile_options(/W4 /WX)
 else()
