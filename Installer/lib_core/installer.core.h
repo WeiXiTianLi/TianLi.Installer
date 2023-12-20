@@ -6,7 +6,7 @@
 #include <string_view>
 namespace tianli
 {
-#ifdef C_CORE
+#ifdef CAPI_CORE
     void download(const char *url, const char *filename, void (*progress)(int, int));
     void decompression(const char *file_path, const char *target_dir, void (*progress)(int, int));
     void install(const char *files_dir, const char *install_dir, void (*progress)(int, int));
