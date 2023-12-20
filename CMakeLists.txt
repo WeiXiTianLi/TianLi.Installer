@@ -2,9 +2,11 @@ cmake_minimum_required(VERSION 3.23)
 
 set(ThridPatryDir ${CMAKE_SOURCE_DIR}/third_party)
 
+include(cmake/utils.cmake)
 include(cmake/version.cmake)
 include(cmake/auto_subdirectory.cmake)
 
+tianli_parse_version()
 tianli_installer_parse_version(config/version)
 message (STATUS "TianLi.Installer version: ${tianli_installer_version_cmake}")
 
@@ -30,5 +32,20 @@ endif()
 if(NOT BUILD_ONLY_TESTS)
     add_subdirectory(Installer)
 endif()
-add_subdirectory(tools)
+
+
+if (BUILD_TEST)
 add_subdirectory(tests)
+endif()
+
+if (BUILD_BENCHMARK)
+add_subdirectory(benchmark)
+endif()
+
+if (BUILD_TOOLS)
+add_subdirectory(tools)
+endif()
+
+if (BUILD_EXAMPLES)
+add_subdirectory(examples)
+endif()
