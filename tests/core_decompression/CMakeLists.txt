@@ -4,7 +4,7 @@ add_executable(${test_name} main.cpp)
 
 if(MSVC)
 include(FetchContent)
-# zlib
+# minizip requires zlib
 FetchContent_Declare(minizip GIT_REPOSITORY https://github.com/zlib-ng/minizip-ng
     GIT_TAG        4.0.1)
 FetchContent_MakeAvailable(minizip)
@@ -17,8 +17,14 @@ target_include_directories(${test_name} PUBLIC ${zlib_BINARY_DIR})
 target_include_directories(${test_name} PUBLIC "${zlib_SOURCE_DIR}/contrib/minizip/")
 message(STATUS "zlib_SOURCE_DIR: ${zlib_SOURCE_DIR}")
 else()
-find_package(ZLIB REQUIRED)
-target_link_libraries(${test_name} PRIVATE ZLIB::ZLIB)
+include(FetchContent)
+# minizip requires zlib 
+# MZ_CODE_COVERAGE=ON -D MZ_FORCE_FETCH_LIBS=ON
+set(MZ_CODE_COVERAGE ON)
+set(MZ_FORCE_FETCH_LIBS ON)
+FetchContent_Declare(minizip GIT_REPOSITORY https://github.com/zlib-ng/minizip-ng
+    GIT_TAG        4.0.1)
+FetchContent_MakeAvailable(minizip)
 endif()
 
 
@@ -31,5 +37,5 @@ endif()
 string(REPLACE "_" ";" test_name_splits ${test_name})
 list(GET test_name_splits 1 test_group_name)
 set_target_properties(${test_name} PROPERTIES FOLDER "tests/${test_group_name}")
-target_link_libraries(${test_name} ${OpenCV_LIBS})
-add_test(NAME ${test_name} COMMAND ${test_name})
+target_link_libraries(${test_name} tianli::lib_core::decompression )
+add_test(NAME ${test_name} COMMAND ${test_name} "D:/library/TianLi.Installer/build/tests/core_decompression/cmake_install.zip" -"D:/library/TianLi.Installer/build/tests/core_decompression/unzip")

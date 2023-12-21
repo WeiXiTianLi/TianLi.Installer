@@ -15,6 +15,4 @@ else()
 
 endif()
 
-if (BUILD_TESTS)
     auto_subdirectory()
-endif()

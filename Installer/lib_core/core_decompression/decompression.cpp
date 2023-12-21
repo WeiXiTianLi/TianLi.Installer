@@ -1,8 +1,9 @@
 #include "decompression.h"
 
-// #include <zlib.h>
-#include <zlib.h>
+//#include <zlib.h>
 #include "unzip.h"
+
+#define _used_unz64
 
 namespace tianli
 {
@@ -22,7 +23,7 @@ namespace tianli
             {
                 return std::nullopt;
             }
-#ifdef _unz64_H
+#ifdef _used_unz64
             // zlib 解压缩 zip
             auto file_name = file.string();
             auto target_dir_name = target_dir.string();
@@ -38,7 +39,22 @@ namespace tianli
                 unzClose(uf);
                 return std::nullopt;
             }
-            uLong i;
+            unsigned long i;
+            int all_size = 0;
+            for(i = 0; i < gi.number_entry; ++i)
+            {
+                unz_file_info64 file_info;
+                char filename[256];
+                if (unzGetCurrentFileInfo64(uf, &file_info, filename, sizeof(filename), NULL, 0, NULL, 0) != UNZ_OK)
+                {
+                    unzClose(uf);
+                    return std::nullopt;
+                }
+                all_size += file_info.uncompressed_size;
+                unzGoToNextFile(uf);
+            }
+            unzGoToFirstFile(uf);
+            int current_size = 0;
             for (i = 0; i < gi.number_entry; ++i)
             {
                 unz_file_info64 file_info;
@@ -70,6 +86,11 @@ namespace tianli
                 while ((read = unzReadCurrentFile(uf, buf, sizeof(buf))) > 0)
                 {
                     file_stream.write(buf, read);
+                    if (progress)
+                    {
+                        current_size += read;
+                        progress(current_size, all_size);
+                    }
                 }
                 file_stream.close();
                 unzCloseCurrentFile(uf);
