@@ -1,6 +1,11 @@
 #include "download.h"
 #include <cpr/cpr.h>
 
+// support __int64
+#ifndef _WIN32
+#define __int64 long long
+#endif
+
 namespace tianli
 {
     namespace core

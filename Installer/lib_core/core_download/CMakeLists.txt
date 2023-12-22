@@ -5,6 +5,7 @@ include(FetchContent)
 # cpr
 set(CPR_ENABLE_SSL OFF)
 set(CURL_ZLIB OFF)
+set(ENABLE_THREADED_RESOLVER OFF)
 FetchContent_Declare(cpr GIT_REPOSITORY https://github.com/libcpr/cpr
     GIT_TAG 1.10.4)
 FetchContent_MakeAvailable(cpr)
