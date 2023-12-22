@@ -2,30 +2,7 @@ get_filename_component(dir_name ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 set(test_name test_${dir_name})
 add_executable(${test_name} main.cpp)
 
-if(MSVC)
-include(FetchContent)
-# minizip requires zlib
-FetchContent_Declare(minizip GIT_REPOSITORY https://github.com/zlib-ng/minizip-ng
-    GIT_TAG        4.0.1)
-FetchContent_MakeAvailable(minizip)
-target_link_libraries(${test_name} PRIVATE zlibstatic)
-# include zlib
-target_include_directories(${test_name} PUBLIC ${zlib_SOURCE_DIR})
-# include zconf.h
-target_include_directories(${test_name} PUBLIC ${zlib_BINARY_DIR})
-# include minizip
-target_include_directories(${test_name} PUBLIC "${zlib_SOURCE_DIR}/contrib/minizip/")
-message(STATUS "zlib_SOURCE_DIR: ${zlib_SOURCE_DIR}")
-else()
-include(FetchContent)
-# minizip requires zlib 
-# MZ_CODE_COVERAGE=ON -D MZ_FORCE_FETCH_LIBS=ON
-set(MZ_CODE_COVERAGE ON)
-set(MZ_FORCE_FETCH_LIBS ON)
-FetchContent_Declare(minizip GIT_REPOSITORY https://github.com/zlib-ng/minizip-ng
-    GIT_TAG        4.0.1)
-FetchContent_MakeAvailable(minizip)
-endif()
+
 
 
 if(MSVC)

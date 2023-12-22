@@ -90,6 +90,10 @@
         "bitset": "cpp",
         "complex": "cpp",
         "stack": "cpp",
-        "typeindex": "cpp"
+        "typeindex": "cpp",
+        "*.tcc": "cpp",
+        "cwctype": "cpp",
+        "string_view": "cpp",
+        "cinttypes": "cpp"
     }
 }
