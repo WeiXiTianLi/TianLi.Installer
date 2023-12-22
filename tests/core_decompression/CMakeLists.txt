@@ -2,8 +2,7 @@ get_filename_component(dir_name ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 set(test_name test_${dir_name})
 add_executable(${test_name} main.cpp)
 
-
-
+target_include_directories(${test_name} PRIVATE ${TianLiCoreDir})
 
 if(MSVC)
     set_property(TARGET ${test_name} PROPERTY  MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
