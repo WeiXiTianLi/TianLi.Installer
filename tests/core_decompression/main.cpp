@@ -15,7 +15,7 @@ int main(int argc, char* argv[])
     #if 1
     std::cout << "DEBUG" << std::endl;
     #ifdef _WIN32
-    auto zip = "D:/library/TianLi.Installer/build/tests/core_decompression/cmake_install.zip";
+    auto zip = "D:/library/TianLi.Installer/build/tests/core_decompression/test.zip";
     auto dir = "D:/library/TianLi.Installer/build/tests/core_decompression/unzip";
     #else
     auto zip = "/home/ysx/library/TianLi.Installer/build/tests/core_decompression/test.zip";

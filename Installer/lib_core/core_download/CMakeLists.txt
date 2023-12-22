@@ -6,7 +6,7 @@ include(FetchContent)
 set(CPR_ENABLE_SSL OFF)
 set(CURL_ZLIB OFF)
 FetchContent_Declare(cpr GIT_REPOSITORY https://github.com/libcpr/cpr
-    GIT_TAG 1.9.7)
+    GIT_TAG 1.10.4)
 FetchContent_MakeAvailable(cpr)
 target_link_libraries(lib_core_download PRIVATE cpr::cpr)
 
