@@ -12,10 +12,15 @@ else()
     set(CPR_ENABLE_CURL_HTTP_ONLY OFF)
     set(CPR_FORCE_WINSSL_BACKEND ON)
 endif()
+
+if(NOT WIN32)
+    set(pthreads_lib pthread)
+endif()
+
 FetchContent_Declare(cpr GIT_REPOSITORY https://github.com/libcpr/cpr
     GIT_TAG 1.10.4)
 FetchContent_MakeAvailable(cpr)
-target_link_libraries(lib_core_download PRIVATE cpr::cpr)
+target_link_libraries(lib_core_download PRIVATE cpr::cpr ${pthreads_lib})
 
 target_sources(lib_core_download
     PRIVATE
