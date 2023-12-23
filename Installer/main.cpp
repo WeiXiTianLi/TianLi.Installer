@@ -15,7 +15,8 @@ int print(std::vector<std::string> &arg)
 
 int main_window(int argc, char *argv[])
 {
-    // 开启高分屏支持
+    // QFont::setStyleStrategy(QFont::PreferAntialias);
+    //  开启高分屏支持
     QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
     QApplication::setAttribute(Qt::AA_UseOpenGLES);

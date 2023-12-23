@@ -12,6 +12,7 @@
 #include <QFocusEvent>
 #include <QPropertyAnimation>
 #include <QGraphicsDropShadowEffect>
+#include <QScreen>
 #include <QDebug>
 
 namespace tianli
@@ -83,6 +84,11 @@ namespace tianli
         ui->stackedWidget->setCurrentIndex(1);
 
         this->installEventFilter(this);
+
+        for (auto &screen : QApplication::screens())
+        {
+            connect(screen, &QScreen::logicalDotsPerInchChanged, this, &tianli::tianli_widget::on_screen_changed);
+        }
     }
 
     tianli_widget::~tianli_widget()
@@ -157,6 +163,12 @@ namespace tianli
     {
         event->accept();
     }
+
+    void tianli_widget::on_screen_changed(qreal dpi)
+    {
+        qDebug() << dpi;
+    }
+
     void tianli_widget::pushButton_UI_Close()
     {
         ui->stackedWidget->setCurrentIndex(3);

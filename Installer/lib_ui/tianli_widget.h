@@ -41,7 +41,9 @@ namespace tianli {
         void mouseMoveEvent(QMouseEvent* event) Q_DECL_OVERRIDE;
         void closeEvent(QCloseEvent* event) Q_DECL_OVERRIDE;
     private:
-        bool eventFilter(QObject* object, QEvent* event) Q_DECL_OVERRIDE;
+        bool eventFilter(QObject *object, QEvent *event) Q_DECL_OVERRIDE;
+    public slots:
+        void on_screen_changed(qreal dpi);
     private slots:
         void pushButton_UI_Close();
         void pushButton_UI_Mini();
