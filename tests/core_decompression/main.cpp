@@ -1,6 +1,6 @@
 #include <iostream>
 #include <filesystem>
-#include "../../../Installer/lib_core/core_decompression/decompression.h"
+#include <core_decompression/decompression.h>
 
 int main(int argc, char *argv[])
 {
