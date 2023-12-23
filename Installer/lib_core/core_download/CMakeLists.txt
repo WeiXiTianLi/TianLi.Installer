@@ -3,6 +3,7 @@ add_library(tianli::lib_core::download ALIAS lib_core_download)
 
 include(FetchContent)
 # cpr
+set(CPR_ENABLE_SSL OFF)
 FetchContent_Declare(cpr GIT_REPOSITORY https://github.com/libcpr/cpr
     GIT_TAG 1.10.4)
 FetchContent_MakeAvailable(cpr)

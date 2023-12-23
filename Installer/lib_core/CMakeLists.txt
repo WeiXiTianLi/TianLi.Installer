@@ -1,3 +1,4 @@
+message(STATUS "core")
 add_library(lib_core STATIC)
 add_library(tianli::lib_core ALIAS lib_core)
 
@@ -22,7 +23,7 @@ endif ()
 
 
 add_subdirectory(core_decompression)
-add_subdirectory(core_download)
+#add_subdirectory(core_download)
 add_subdirectory(core_install)
 add_subdirectory(core_registration)
 
