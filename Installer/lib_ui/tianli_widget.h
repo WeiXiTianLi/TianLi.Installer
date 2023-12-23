@@ -9,13 +9,18 @@
 
 class QGraphicsDropShadowEffect;
 class QPropertyAnimation;
-namespace tianli {
+namespace tianli
+{
     QT_BEGIN_NAMESPACE
-    namespace Ui { class tianli_widget; }
+    namespace Ui
+    {
+        class tianli_widget;
+    }
     QT_END_NAMESPACE
 
-    class tianli_widget : public QWidget {
-    Q_OBJECT
+    class tianli_widget : public QWidget
+    {
+        Q_OBJECT
 
     public:
         explicit tianli_widget(QWidget *parent = nullptr);
@@ -26,20 +31,22 @@ namespace tianli {
         Ui::tianli_widget *ui;
 
     private:
-        QGraphicsDropShadowEffect* mainShadow_A;
-        QGraphicsDropShadowEffect* mainShadow_B;
-        QGraphicsDropShadowEffect* mainShadow;
-        QPropertyAnimation* mainShadowAnimation;
-        QPropertyAnimation* exitAnimation;
-        QPropertyAnimation* exitAnimation_hide;
+        QGraphicsDropShadowEffect *mainShadow_A;
+        QGraphicsDropShadowEffect *mainShadow_B;
+        QGraphicsDropShadowEffect *mainShadow;
+        QPropertyAnimation *mainShadowAnimation;
+        QPropertyAnimation *exitAnimation;
+        QPropertyAnimation *exitAnimation_hide;
+
     private:
         QPoint m_Press;
         QPoint m_Move;
         bool leftBtnClk = false;
-        void mousePressEvent(QMouseEvent* event) Q_DECL_OVERRIDE;
-        void mouseReleaseEvent(QMouseEvent* event) Q_DECL_OVERRIDE;
-        void mouseMoveEvent(QMouseEvent* event) Q_DECL_OVERRIDE;
-        void closeEvent(QCloseEvent* event) Q_DECL_OVERRIDE;
+        void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+        void mouseReleaseEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+        void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+        void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
+
     private:
         bool eventFilter(QObject *object, QEvent *event) Q_DECL_OVERRIDE;
     public slots:
@@ -61,4 +68,4 @@ namespace tianli {
     };
 } // tianli
 
-#endif //TIANLI_INSTALLER_TIANLI_WIDGET_H
+#endif // TIANLI_INSTALLER_TIANLI_WIDGET_H
