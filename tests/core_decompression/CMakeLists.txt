@@ -19,5 +19,5 @@ add_test(NAME ${test_name} COMMAND ${test_name} "./test.zip" "./unzip")
 # copy test.zip to bin
 add_custom_command(TARGET ${test_name} POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
-    test.zip
+    ${CMAKE_CURRENT_SOURCE_DIR}/test.zip
     $<TARGET_FILE_DIR:${test_name}>/test.zip)
