@@ -1,6 +1,11 @@
 #include "download.h"
 #include <cpr/cpr.h>
 
+// support __int64
+#ifndef _WIN32
+#define __int64 long long
+#endif
+
 namespace tianli
 {
     namespace core
@@ -30,13 +35,13 @@ namespace tianli
 
             if (res.status_code != 200)
             {
-                return std::nullopt;
+                return std::string("download failed: ") + std::to_string(res.status_code) + " " + res.error.message;
             }
 
             std::ofstream file_stream(file, std::ios::binary);
             file_stream.write(res.text.data(), res.text.size());
             file_stream.close();
-            return file.string();
+            return  std::nullopt;
         }
     } // namespace core
 } // namespace tianli

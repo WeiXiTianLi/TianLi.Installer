@@ -14,9 +14,21 @@ int main(int argc, char* argv[])
     }
     #if 1
     std::cout << "DEBUG" << std::endl;
-    auto zip = "D:/library/TianLi.Installer/build/tests/core_decompression/cmake_install.zip";
+    #ifdef _WIN32
+    auto zip = "D:/library/TianLi.Installer/build/tests/core_decompression/test.zip";
     auto dir = "D:/library/TianLi.Installer/build/tests/core_decompression/unzip";
-    tianli::core::decompression(std::filesystem::path(zip), std::filesystem::path(dir), [](int a, int b) { std::cout << a << " " << b << std::endl; });
+    #else
+    auto zip = "/home/ysx/library/TianLi.Installer/build/tests/core_decompression/test.zip";
+    auto dir = "/home/ysx/library/TianLi.Installer/build/tests/core_decompression/unzip";
+    #endif
+    if(auto res = tianli::core::decompression(std::filesystem::path(zip), std::filesystem::path(dir), [](int a, int b) { std::cout << a << " " << b << std::endl; }); res.has_value())
+    {
+        std::cout << "decompression failed: " << *res << std::endl;
+    }
+    else
+    {
+        std::cout << "decompression success" << std::endl;
+    }
     #else
         if (argc != 3)
     {

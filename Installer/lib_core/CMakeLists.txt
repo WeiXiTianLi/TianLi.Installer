@@ -23,7 +23,7 @@ endif ()
 
 
 add_subdirectory(core_decompression)
-#add_subdirectory(core_download)
+add_subdirectory(core_download)
 add_subdirectory(core_install)
 add_subdirectory(core_registration)
 

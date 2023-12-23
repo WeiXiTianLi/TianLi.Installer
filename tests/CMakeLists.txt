@@ -9,7 +9,7 @@ if(MSVC)
     # cpp20
     add_compile_options(/std:c++latest)
     # c99
-    add_compile_options(/std:c99)
+    # add_compile_options(/std:c99)
 else()
     # add_compile_options(-std=c++2a)
 

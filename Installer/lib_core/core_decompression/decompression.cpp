@@ -13,7 +13,7 @@ namespace tianli
         {
             if (!std::filesystem::exists(file))
             {
-                return std::nullopt;
+                return "file not exists";
             }
             if (!std::filesystem::exists(target_dir))
             {
@@ -21,7 +21,7 @@ namespace tianli
             }
             if (file.extension() != ".zip")
             {
-                return std::nullopt;
+                return  "file extension not .zip";
             }
 #ifdef _used_unz64
             // zlib 解压缩 zip
@@ -31,13 +31,13 @@ namespace tianli
             unzFile uf = unzOpen64(file_name.c_str());
             if (uf == NULL)
             {
-                return std::nullopt;
+                return "unzOpen64 failed";
             }
             unz_global_info64 gi;
             if (unzGetGlobalInfo64(uf, &gi) != UNZ_OK)
             {
                 unzClose(uf);
-                return std::nullopt;
+                return "unzGetGlobalInfo64 failed";
             }
             unsigned long i;
             int all_size = 0;
@@ -48,7 +48,7 @@ namespace tianli
                 if (unzGetCurrentFileInfo64(uf, &file_info, filename, sizeof(filename), NULL, 0, NULL, 0) != UNZ_OK)
                 {
                     unzClose(uf);
-                    return std::nullopt;
+                    return "unzGetCurrentFileInfo64 failed";
                 }
                 all_size += file_info.uncompressed_size;
                 unzGoToNextFile(uf);
@@ -62,13 +62,15 @@ namespace tianli
                 if (unzGetCurrentFileInfo64(uf, &file_info, filename, sizeof(filename), NULL, 0, NULL, 0) != UNZ_OK)
                 {
                     unzClose(uf);
-                    return std::nullopt;
+                    return "unzGetCurrentFileInfo64 failed";
                 }
-                if (unzOpenCurrentFile(uf) != UNZ_OK)
+                auto unz_open_current_file_res = unzOpenCurrentFile(uf);
+                if (unz_open_current_file_res != UNZ_OK)
                 {
                     unzClose(uf);
-                    return std::nullopt;
+                    return std::string("unzOpenCurrentFile failed: ") + filename + " " + std::to_string(unz_open_current_file_res);
                 }
+
                 std::filesystem::path file_path = target_dir / filename;
                 if (file_path.filename().string().empty())
                 {
@@ -111,7 +113,7 @@ namespace tianli
             }
 #endif
 
-            return target_dir.string();
+            return std::nullopt;
         }
     } // namespace core
 } // namespace tianli
