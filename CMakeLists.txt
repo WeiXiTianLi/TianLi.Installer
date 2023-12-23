@@ -21,6 +21,10 @@ tianli_parse_version()
 tianli_installer_parse_version(config/version)
 message (STATUS "TianLi.Installer version: ${tianli_installer_version_cmake}")
 
+# 统一生成到build目录中的bin和lib中
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+
 project(TianLi.Installer
         LANGUAGES CXX
         VERSION ${tianli_installer_version_cmake}
