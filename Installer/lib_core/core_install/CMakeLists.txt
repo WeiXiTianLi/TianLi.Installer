@@ -1,8 +1,8 @@
-add_library(lib_core_install STATIC)
-add_library(tianli::lib_core::install ALIAS lib_core_install)
+add_library(core_install STATIC)
+add_library(tianli::core::install ALIAS core_install)
 
 
-target_sources(lib_core_install
+target_sources(core_install
     PRIVATE
         install.cpp
     PUBLIC

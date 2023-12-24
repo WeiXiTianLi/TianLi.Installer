@@ -13,7 +13,7 @@ endif()
 string(REPLACE "_" ";" test_name_splits ${test_name})
 list(GET test_name_splits 1 test_group_name)
 set_target_properties(${test_name} PROPERTIES FOLDER "tests/${test_group_name}")
-target_link_libraries(${test_name} tianli::lib_core::decompression)
+target_link_libraries(${test_name} tianli::core::decompression)
 
 add_test(NAME ${test_name} COMMAND ${test_name} "./test.zip" "./unzip")
 # copy test.zip to bin

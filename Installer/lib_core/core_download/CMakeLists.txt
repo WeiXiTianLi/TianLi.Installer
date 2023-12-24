@@ -1,5 +1,5 @@
-add_library(lib_core_download STATIC)
-add_library(tianli::lib_core::download ALIAS lib_core_download)
+add_library(core_download STATIC)
+add_library(tianli::core::download ALIAS core_download)
 
 include(FetchContent)
 # cpr
@@ -14,9 +14,9 @@ endif()
 if(NOT WIN32)
     set(pthreads_lib pthread)
 endif()
-target_link_libraries(lib_core_download PRIVATE cpr::cpr ${pthreads_lib})
+target_link_libraries(core_download PRIVATE cpr::cpr ${pthreads_lib})
 
-target_sources(lib_core_download
+target_sources(core_download
     PRIVATE
         download.cpp
     PUBLIC

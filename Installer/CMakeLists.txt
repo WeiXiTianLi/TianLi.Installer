@@ -18,9 +18,9 @@ else()
 endif()
 
 if(BUILD_ONLY_CORE)
-    set(libs tianli::lib_core)
+    set(libs tianli::core)
 else()
-    set(libs tianli::lib_ui tianli::lib_core)
+    set(libs tianli::lib_ui tianli::core)
 endif()
 
 

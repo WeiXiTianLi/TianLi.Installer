@@ -1,6 +1,6 @@
 message(STATUS "core")
-add_library(lib_core STATIC)
-add_library(tianli::lib_core ALIAS lib_core)
+add_library(core STATIC)
+add_library(tianli::core ALIAS core)
 
 
 set(BUILD_SHARED_LIBS OFF)
@@ -9,7 +9,7 @@ set(BUILD_SHARED_LIBS OFF)
 # 设置为C++17
 set(CMAKE_CXX_STANDARD 20)
 if (CMAKE_VERSION VERSION_GREATER 3.12)
-  set_property(TARGET lib_core PROPERTY CXX_STANDARD 20)
+  set_property(TARGET core PROPERTY CXX_STANDARD 20)
 endif()
 
 # 设置UTF-8编码
@@ -27,17 +27,17 @@ add_subdirectory(core_download)
 add_subdirectory(core_install)
 add_subdirectory(core_registration)
 
-target_sources(lib_core
-PRIVATE
-    installer.core.cpp
-PUBLIC
-    installer.core.h
+target_sources(core
+    PRIVATE
+        installer.core.cpp
+    PUBLIC
+        installer.core.h
 )
 
-target_include_directories(lib_core PRIVATE 
-    tianli::lib_core::decompression 
-    tianli::lib_core::download
-    tianli::lib_core::install
-    tianli::lib_core::registration
+target_include_directories(core PRIVATE 
+    tianli::core::decompression 
+    tianli::core::download
+    tianli::core::install
+    tianli::core::registration
 )
 
