@@ -8,7 +8,7 @@ set(BUILD_ONLY_TESTS OFF CACHE BOOL "Build only tests")
 
 #--------------------------------------------------
 set(BUILD_TESTS ON)
-set(BUILD_ONLY_CORE ON)
+#set(BUILD_ONLY_CORE ON)
 
 set(ThridPatryDir ${CMAKE_SOURCE_DIR}/third_party)
 set(TianLiCoreDir ${CMAKE_SOURCE_DIR}/Installer/lib_core)
@@ -24,6 +24,7 @@ message (STATUS "TianLi.Installer version: ${tianli_installer_version_cmake}")
 # 统一生成到build目录中的bin和lib中
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
 project(TianLi.Installer
         LANGUAGES CXX
