@@ -23,12 +23,14 @@ qt5_add_resources(QRC_FILES  ${CMAKE_CURRENT_SOURCE_DIR}/qrc/tianli.qrc )
 
 target_sources(lib_ui
         PRIVATE ${UI_FILES} ${QRC_FILES}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tianli_widget.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/tianli_widget.h
-        ${CMAKE_CURRENT_SOURCE_DIR}/widget/rounded_rectangle.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/widget/rounded_rectangle.h
-        ${CMAKE_CURRENT_SOURCE_DIR}/common/time_line_label/time_line_label.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/common/time_line_label/time_line_label.h
+        tianli_widget.cpp
+        tianli_widget.h
+        tianli_window.cpp
+        tianli_window.h
+        widget/rounded_rectangle.cpp
+        widget/rounded_rectangle.h
+        common/time_line_label/time_line_label.cpp
+        common/time_line_label/time_line_label.h
         )
         
 target_link_libraries(lib_ui

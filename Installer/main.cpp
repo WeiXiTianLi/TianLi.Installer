@@ -1,8 +1,10 @@
 #pragma
 #include <iostream>
-#include "lib_ui/tianli_widget.h"
-#include "QApplication"
-#include "QObject"
+#include <vector>
+#include <string>
+#include <map>
+#include "lib_ui/tianli_window.h"
+
 
 int print(std::vector<std::string> &arg)
 {
@@ -15,16 +17,8 @@ int print(std::vector<std::string> &arg)
 
 int main_window(int argc, char *argv[])
 {
-    // QFont::setStyleStrategy(QFont::PreferAntialias);
-    //  开启高分屏支持
-    QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
-    QApplication::setAttribute(Qt::AA_UseOpenGLES);
-    QApplication a(argc, argv);
-    tianli::tianli_widget w;
-
-    w.show();
-    return a.exec();
+    auto widget = tianli::ui::create(argc, argv);
+    return tianli::ui::exec(widget);
 }
 
 int main_quiet_install(int argc, char *argv[])
