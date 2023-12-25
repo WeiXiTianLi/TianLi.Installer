@@ -8,7 +8,7 @@ set(BUILD_ONLY_TESTS OFF CACHE BOOL "Build only tests")
 
 #--------------------------------------------------
 set(BUILD_TESTS ON)
-#set(BUILD_ONLY_CORE ON)
+set(BUILD_ONLY_CORE ON)
 
 set(ThridPatryDir ${CMAKE_SOURCE_DIR}/third_party)
 set(TianLiCoreDir ${CMAKE_SOURCE_DIR}/Installer/lib_core)

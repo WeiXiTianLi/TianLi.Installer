@@ -20,6 +20,7 @@ endif()
 if(BUILD_ONLY_CORE)
     set(libs tianli::core)
 else()
+    add_compile_definitions(INSTALLER_UI_SUPPORT)
     set(libs tianli::lib_ui tianli::core)
 endif()
 
