@@ -124,7 +124,7 @@ bool create_random_tmp_file(const std::filesystem::path& tmp_dir, std::filesyste
 {
 #ifdef _WIN32
     char tmp_file_chars[MAX_PATH];
-    if (GetTempFileName(tmp_dir.c_str(), "tianli", 0, tmp_file_chars) == 0)
+    if (GetTempFileNameA(tmp_dir.string().c_str(), "tianli", 0, tmp_file_chars) == 0)
     {
         return false;
     }
@@ -154,7 +154,7 @@ bool create_tmp_file(std::string& tmp_file)
     {
         return false;
     }
-    tmp_file = tmp_file_path;
+    tmp_file = tmp_file_path.string();
     return true;
 }
 
