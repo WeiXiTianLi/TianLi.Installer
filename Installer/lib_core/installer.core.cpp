@@ -1,8 +1,9 @@
 #include "installer.core.h"
-#include "core_decompression/decompression.h"
-#include "core_download/download.h"
-#include "core_install/install.h"
-#include "core_registration/registration.h"
+#include <decompression.h>
+#include <download.h>
+#include <install.h>
+#include <registration.h>
+
 namespace tianli
 {
     std::optional<std::string> download(std::string_view url, std::filesystem::path file, std::function<void(int, int)> progress)
