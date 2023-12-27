@@ -5,6 +5,9 @@ set(BUILD_BENCHMARK OFF CACHE BOOL "Build benchmark")
 set(BUILD_TOOLS OFF CACHE BOOL "Build tools")
 set(BUILD_EXAMPLES OFF CACHE BOOL "Build examples")
 set(BUILD_ONLY_TESTS OFF CACHE BOOL "Build only tests")
+set(WITH_VCPKG OFF CACHE BOOL "Use vcpkg")
+set(VCPKG_PATH "" CACHE STRING "Vcpkg path")
+set(VCPKG_TARGET_TRIPLET "" CACHE STRING "Vcpkg triplet")
 
 #--------------------------------------------------
 set(BUILD_TESTS ON)
