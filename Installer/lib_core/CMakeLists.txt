@@ -48,17 +48,3 @@ target_link_libraries(core PRIVATE
     tianli::core::download
     tianli::core::install
     tianli::core::registration)
-
-# merge static library
- add_custom_command(TARGET core POST_BUILD
-     COMMAND ${CMAKE_AR} -x $<TARGET_FILE:core_decompression>
-     COMMAND ${CMAKE_AR} -x $<TARGET_FILE:core_download>
-     COMMAND ${CMAKE_AR} -x $<TARGET_FILE:core_install>
-     COMMAND ${CMAKE_AR} -x $<TARGET_FILE:core_registration>
-     COMMAND ${CMAKE_AR} -x $<TARGET_FILE:core>
-     COMMAND ${CMAKE_AR} -qc $<TARGET_FILE:core> *.o
-     COMMAND ${CMAKE_COMMAND} -E remove *.o
-     COMMENT "merge static library"
- )
-
-
