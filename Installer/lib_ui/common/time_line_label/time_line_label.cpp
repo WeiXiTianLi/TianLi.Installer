@@ -13,9 +13,9 @@
 
 namespace tianli
 {
-    time_line_label::time_line_label(QWidget *parent) : QWidget(parent), ui(new Ui::time_line_label)
+    time_line_label::time_line_label(QWidget *parent) : QWidget(parent)
     {
-        ui->setupUi(this);
+        ui.setupUi(this);
 
         timer = new QTimer(this);
         connect(timer, &QTimer::timeout, this, &time_line_label::timeout);
@@ -23,9 +23,9 @@ namespace tianli
 
         UI_NoCheck();
     }
-    time_line_label::time_line_label(QString step_name, QWidget *parent) : QWidget(parent), ui(new Ui::time_line_label)
+    time_line_label::time_line_label(QString step_name, QWidget *parent) : QWidget(parent)
     {
-        ui->setupUi(this);
+        ui.setupUi(this);
 
         timer = new QTimer(this);
         connect(timer, &QTimer::timeout, this, &time_line_label::timeout);
@@ -37,7 +37,6 @@ namespace tianli
 
     time_line_label::~time_line_label()
     {
-        delete ui;
     }
 
     void time_line_label::paintEvent(QPaintEvent *event)
@@ -127,23 +126,23 @@ namespace tianli
 
     void time_line_label::UI_NoCheck()
     {
-        ui->label_Title->move(22, 7);
-        ui->label_ProgressBackground->hide();
-        ui->label_ProgressBar->hide();
+        ui.label_Title->move(22, 7);
+        ui.label_ProgressBackground->hide();
+        ui.label_ProgressBar->hide();
         timer->stop();
     }
 
     void time_line_label::UI_Checked()
     {
-        ui->label_Title->move(22, 0);
-        ui->label_ProgressBackground->show();
-        ui->label_ProgressBar->show();
+        ui.label_Title->move(22, 0);
+        ui.label_ProgressBackground->show();
+        ui.label_ProgressBar->show();
         timer->start();
     }
 
     void time_line_label::setStepName(QString name)
     {
-        ui->label_Title->setText(name);
+        ui.label_Title->setText(name);
     }
 
     void time_line_label::setAction(bool value)

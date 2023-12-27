@@ -6,18 +6,12 @@
 #define TIANLI_INSTALLER_TIANLI_WIDGET_H
 
 #include <QWidget>
+#include <QPropertyAnimation>
+#include <QGraphicsDropShadowEffect>
+#include "ui_tianli_widget.h"
 
-class QGraphicsDropShadowEffect;
-class QPropertyAnimation;
 namespace tianli
 {
-    QT_BEGIN_NAMESPACE
-    namespace Ui
-    {
-        class tianli_widget;
-    }
-    QT_END_NAMESPACE
-
     class tianli_widget : public QWidget
     {
         Q_OBJECT
@@ -26,9 +20,6 @@ namespace tianli
         explicit tianli_widget(QWidget *parent = nullptr);
 
         ~tianli_widget() override;
-
-    private:
-        Ui::tianli_widget *ui;
 
     private:
         QGraphicsDropShadowEffect *mainShadow_A;
@@ -65,6 +56,9 @@ namespace tianli
         void signal_finishing_cancel();
         void signal_finished_run();
         void signal_finished_exit();
+
+    private:
+        Ui::tianli_widget ui;
     };
 } // tianli
 

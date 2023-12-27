@@ -6,16 +6,10 @@
 #define TIANLI_INSTALLER_TIME_LINE_LABEL_H
 
 #include <QWidget>
+#include "ui_time_line_label.h"
 
 namespace tianli
 {
-    QT_BEGIN_NAMESPACE
-    namespace Ui
-    {
-        class time_line_label;
-    }
-    QT_END_NAMESPACE
-
     class time_line_label : public QWidget
     {
         Q_OBJECT
@@ -25,9 +19,6 @@ namespace tianli
         explicit time_line_label(QString step_name, QWidget *parent = nullptr);
 
         ~time_line_label() override;
-
-    private:
-        Ui::time_line_label *ui;
 
     private:
         void paintEvent(QPaintEvent *event);
@@ -74,6 +65,9 @@ namespace tianli
         float m_c_D = 13;
         float m_c_Magin = 5.0;
         float m_Angle = 0;
+
+    private:
+        Ui::time_line_label ui;
     };
 } // tianli
 

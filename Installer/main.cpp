@@ -4,9 +4,8 @@
 #include <string>
 #include <map>
 #ifdef INSTALLER_UI_SUPPORT
-#include "lib_ui/tianli_window.h"
+#include <tianli_window.h>
 #endif
-
 
 int print(std::vector<std::string> &arg)
 {

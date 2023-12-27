@@ -2,6 +2,13 @@ add_library(lib_ui STATIC)
 add_library(tianli::lib_ui ALIAS lib_ui)
 
 if(MSVC)
+    set_property(TARGET lib_ui PROPERTY  MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+else()
+    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -static")
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -static")
+endif()
+
+if(MSVC)
     set(Qt5VER "qt-5.15.2-lite-release-static")
     set(Qt5_DIR "${ThridPatryDir}/${Qt5VER}/lib/cmake/Qt5")
 else()
@@ -18,13 +25,30 @@ else()
 endif()
 
 find_package(Qt5 COMPONENTS Core Gui Widgets REQUIRED)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
-include_directories(${CMAKE_CURRENT_BINARY_DIR})
+
+# moc
+qt5_wrap_cpp(MOC_SRCS
+    tianli_window.h
+    tianli_widget.h
+    widget/rounded_rectangle.h
+    common/time_line_label/time_line_label.h
+    )
+qt5_wrap_ui(UI_FILES
+    tianli_widget.ui
+    widget/rounded_rectangle.ui
+    common/time_line_label/time_line_label.ui
+)
+qt5_add_resources(QRC_FILES qrc/tianli.qrc)
 
 target_sources(lib_ui
-    PRIVATE
+    PUBLIC
+        ${QRC_FILES}
+    PRIVATE 
+        ${MOC_SRCS} ${UI_FILES}
         tianli_widget.cpp
         tianli_widget.h
         tianli_window.cpp
@@ -36,7 +60,7 @@ target_sources(lib_ui
         )
         
 target_link_libraries(lib_ui
-    PRIVATE
+    PUBLIC
         Qt5::Core
         Qt5::Gui
         Qt5::Widgets

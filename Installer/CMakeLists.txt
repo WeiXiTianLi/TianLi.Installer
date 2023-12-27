@@ -5,6 +5,10 @@ if (NOT BUILD_ONLY_CORE)
     add_subdirectory(lib_ui)
 endif()
 
+include_directories(lib_core)
+if (NOT BUILD_ONLY_CORE)
+    include_directories(lib_ui)
+endif()
 
 add_executable(Installer)
 
