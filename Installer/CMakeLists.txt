@@ -16,9 +16,6 @@ target_sources(Installer PRIVATE main.cpp resource/resource.rc resource/app_info
 
 if(MSVC)
     set_property(TARGET Installer PROPERTY  MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
-else()
-    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -static")
-    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -static")
 endif()
 
 if(BUILD_ONLY_CORE)
