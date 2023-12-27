@@ -12,6 +12,9 @@ set(VCPKG_TARGET_TRIPLET "" CACHE STRING "Vcpkg triplet")
 #--------------------------------------------------
 set(BUILD_TESTS ON)
 set(BUILD_ONLY_CORE ON)
+#set(WITH_VCPKG ON)
+#set(VCPKG_PATH "/home/ysx/env/vcpkg")
+#set(VCPKG_TARGET_TRIPLET "x64-linux")
 
 set(ThridPatryDir ${CMAKE_SOURCE_DIR}/third_party)
 set(TianLiCoreDir ${CMAKE_SOURCE_DIR}/Installer/lib_core)

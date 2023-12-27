@@ -3,9 +3,6 @@ add_library(tianli::lib_ui ALIAS lib_ui)
 
 if(MSVC)
     set_property(TARGET lib_ui PROPERTY  MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
-else()
-    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -static")
-    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -static")
 endif()
 
 if(MSVC)
