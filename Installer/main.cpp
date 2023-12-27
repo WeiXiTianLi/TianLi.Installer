@@ -69,8 +69,7 @@ std::map<int, std::string> error_map = {
     {5, "需要重新启动"},
     {6, "网络故障"},
     {7, "已在安转期间拒绝包"},
-    {8, "未支持GUI界面启动"}
-};
+    {8, "未支持GUI界面启动"}};
 
 int main(int argc, char *argv[])
 {
@@ -95,5 +94,5 @@ int main(int argc, char *argv[])
     {
         return main_quiet_install(argc, argv);
     }
-    return 0;
+    return main_help();
 }
