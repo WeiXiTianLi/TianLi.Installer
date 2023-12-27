@@ -4,9 +4,8 @@
 #include <string>
 #include <map>
 #ifdef INSTALLER_UI_SUPPORT
-#include "lib_ui/tianli_window.h"
+#include <tianli_window.h>
 #endif
-
 
 int print(std::vector<std::string> &arg)
 {
@@ -69,8 +68,7 @@ std::map<int, std::string> error_map = {
     {5, "需要重新启动"},
     {6, "网络故障"},
     {7, "已在安转期间拒绝包"},
-    {8, "未支持GUI界面启动"}
-};
+    {8, "未支持GUI界面启动"}};
 
 int main(int argc, char *argv[])
 {
