@@ -5,21 +5,18 @@
 // You may need to build the project (run Qt uic code generator) to get "ui_tianli_widget.h" resolved
 
 #include "tianli_widget.h"
-#include "ui_tianli_widget.h"
-
 #include "common/time_line_label/time_line_label.h"
+
 #include <QMouseEvent>
 #include <QFocusEvent>
-#include <QPropertyAnimation>
-#include <QGraphicsDropShadowEffect>
 #include <QScreen>
 #include <QDebug>
 
 namespace tianli
 {
-    tianli_widget::tianli_widget(QWidget *parent) : QWidget(parent), ui(new Ui::tianli_widget)
+    tianli_widget::tianli_widget(QWidget *parent) : QWidget(parent)
     {
-        ui->setupUi(this);
+        ui.setupUi(this);
 
         this->setWindowFlags(Qt::FramelessWindowHint);
         this->setAttribute(Qt::WA_TranslucentBackground, true);
@@ -28,7 +25,7 @@ namespace tianli
         mainShadow->setOffset(0, 0);
         mainShadow->setColor(QColor(255, 255, 255));
         mainShadow->setBlurRadius(16);
-        ui->label_MainShadow->setGraphicsEffect(mainShadow);
+        ui.label_MainShadow->setGraphicsEffect(mainShadow);
 
         mainShadowAnimation = new QPropertyAnimation(mainShadow, "color");
         mainShadowAnimation->setDuration(500);
@@ -38,50 +35,50 @@ namespace tianli
         mainShadow_A->setOffset(0, 0);
         mainShadow_A->setColor(QColor(255, 255, 255));
         mainShadow_A->setBlurRadius(16);
-        ui->label_MainShadow_A->setGraphicsEffect(mainShadow_A);
+        ui.label_MainShadow_A->setGraphicsEffect(mainShadow_A);
 
         mainShadow_B = new QGraphicsDropShadowEffect();
         mainShadow_B->setOffset(0, 0);
         mainShadow_B->setColor(QColor(255, 0, 0));
         mainShadow_B->setBlurRadius(14);
-        ui->label_MainShadow_B->setGraphicsEffect(mainShadow_B);
+        ui.label_MainShadow_B->setGraphicsEffect(mainShadow_B);
 
         int y = 51;
 
         time_line_label *timeLineLabel_1 = new time_line_label("下载");
-        timeLineLabel_1->setParent(ui->stackedWidget->widget(1));
+        timeLineLabel_1->setParent(ui.stackedWidget->widget(1));
         timeLineLabel_1->setGeometry(102, y, 15, 124);
         timeLineLabel_1->setAction(true);
         timeLineLabel_1->setBegin(true);
 
         time_line_label *timeLineLabel_2 = new time_line_label("解压");
-        timeLineLabel_2->setParent(ui->stackedWidget->widget(1));
+        timeLineLabel_2->setParent(ui.stackedWidget->widget(1));
         timeLineLabel_2->setGeometry(102, y + 31 * 1, 15, 124);
         timeLineLabel_2->setAction(true);
 
         time_line_label *timeLineLabel_3 = new time_line_label("安装");
-        timeLineLabel_3->setParent(ui->stackedWidget->widget(1));
+        timeLineLabel_3->setParent(ui.stackedWidget->widget(1));
         timeLineLabel_3->setGeometry(102, y + 31 * 2, 15, 124);
         timeLineLabel_3->setAction(true);
         timeLineLabel_3->setChecked(true);
 
         time_line_label *timeLineLabel_4 = new time_line_label("注册");
-        timeLineLabel_4->setParent(ui->stackedWidget->widget(1));
+        timeLineLabel_4->setParent(ui.stackedWidget->widget(1));
         timeLineLabel_4->setGeometry(102, y + 31 * 3, 15, 124);
         timeLineLabel_4->setEnd(true);
 
-        // connect(ui->pushButton_UI_Close, &QPushButton::clicked, this, &tianli_widget::close);
-        // connect(ui->pushButton_UI_Mini, &QPushButton::clicked, this, &tianli_widget::showMinimized);
+        // connect(ui.pushButton_UI_Close, &QPushButton::clicked, this, &tianli_widget::close);
+        // connect(ui.pushButton_UI_Mini, &QPushButton::clicked, this, &tianli_widget::showMinimized);
 
-        connect(ui->pushButton_UI_Close, &QPushButton::clicked, this, &tianli_widget::pushButton_UI_Close);
-        connect(ui->pushButton_UI_Mini, &QPushButton::clicked, this, &tianli_widget::pushButton_UI_Mini);
-        connect(ui->pushButton_FastInstall, &QPushButton::clicked, this, &tianli_widget::pushButton_FastInstall);
-        connect(ui->pushButton_CustomizeInstall, &QPushButton::clicked, this, &tianli_widget::pushButton_CustomizeInstall);
-        connect(ui->pushButton_Finishing_Cancel, &QPushButton::clicked, this, &tianli_widget::pushButton_Finishing_Cancel);
-        connect(ui->pushButton_Finished_Run, &QPushButton::clicked, this, &tianli_widget::pushButton_Finished_Run);
-        connect(ui->pushButton_Finished_Exit, &QPushButton::clicked, this, &tianli_widget::pushButton_Finished_Exit);
+        connect(ui.pushButton_UI_Close, &QPushButton::clicked, this, &tianli_widget::pushButton_UI_Close);
+        connect(ui.pushButton_UI_Mini, &QPushButton::clicked, this, &tianli_widget::pushButton_UI_Mini);
+        connect(ui.pushButton_FastInstall, &QPushButton::clicked, this, &tianli_widget::pushButton_FastInstall);
+        connect(ui.pushButton_CustomizeInstall, &QPushButton::clicked, this, &tianli_widget::pushButton_CustomizeInstall);
+        connect(ui.pushButton_Finishing_Cancel, &QPushButton::clicked, this, &tianli_widget::pushButton_Finishing_Cancel);
+        connect(ui.pushButton_Finished_Run, &QPushButton::clicked, this, &tianli_widget::pushButton_Finished_Run);
+        connect(ui.pushButton_Finished_Exit, &QPushButton::clicked, this, &tianli_widget::pushButton_Finished_Exit);
 
-        ui->stackedWidget->setCurrentIndex(1);
+        ui.stackedWidget->setCurrentIndex(1);
 
         this->installEventFilter(this);
 
@@ -93,13 +90,12 @@ namespace tianli
 
     tianli_widget::~tianli_widget()
     {
-        delete ui;
     }
 
     void tianli_widget::mousePressEvent(QMouseEvent *event)
     {
         if (event->button() == Qt::LeftButton &&
-            ui->label_MainShadow->frameRect().contains(event->globalPos() - this->frameGeometry().topLeft()))
+            ui.label_MainShadow->frameRect().contains(event->globalPos() - this->frameGeometry().topLeft()))
         {
             m_Press = event->globalPos();
             leftBtnClk = true;
@@ -171,18 +167,18 @@ namespace tianli
 
     void tianli_widget::pushButton_UI_Close()
     {
-        ui->stackedWidget->setCurrentIndex(3);
+        ui.stackedWidget->setCurrentIndex(3);
 
         // ui.label_MainShadow->hide();
 
-        ui->label_MainShadow_A->hide();
-        ui->label_MainShadow_B->hide();
-        ui->pushButton_UI_Close->hide();
-        ui->pushButton_UI_Mini->hide();
-        ui->label_Satellite_Orbit->hide();
+        ui.label_MainShadow_A->hide();
+        ui.label_MainShadow_B->hide();
+        ui.pushButton_UI_Close->hide();
+        ui.pushButton_UI_Mini->hide();
+        ui.label_Satellite_Orbit->hide();
 
         // 渐渐缩小
-        exitAnimation = new QPropertyAnimation(ui->label_MainShadow, "geometry");
+        exitAnimation = new QPropertyAnimation(ui.label_MainShadow, "geometry");
         exitAnimation->setDuration(200);
         exitAnimation->setEndValue(QRect(10 + 50, 20 + 50, 720 - 100, 384 - 100));
         connect(exitAnimation, &QPropertyAnimation::valueChanged, [=]()
@@ -191,7 +187,7 @@ namespace tianli
                 { this->close(); });
         exitAnimation->start();
         // 渐渐隐藏
-        exitAnimation_hide = new QPropertyAnimation(ui->label_MainShadow, "windowOpacity");
+        exitAnimation_hide = new QPropertyAnimation(ui.label_MainShadow, "windowOpacity");
 
         update();
 
@@ -205,17 +201,17 @@ namespace tianli
 
     void tianli_widget::pushButton_FastInstall()
     {
-        ui->stackedWidget->setCurrentIndex(1);
+        ui.stackedWidget->setCurrentIndex(1);
     }
 
     void tianli_widget::pushButton_CustomizeInstall()
     {
-        ui->stackedWidget->setCurrentIndex(2);
+        ui.stackedWidget->setCurrentIndex(2);
     }
 
     void tianli_widget::pushButton_Finishing_Cancel()
     {
-        ui->stackedWidget->setCurrentIndex(0);
+        ui.stackedWidget->setCurrentIndex(0);
     }
 
     void tianli_widget::pushButton_Finished_Run()

@@ -6,13 +6,12 @@
 #define TIANLI_INSTALLER_ROUNDED_RECTANGLE_H
 
 #include <QWidget>
+#include "ui_rounded_rectangle.h"
 
-namespace tianli {
-    QT_BEGIN_NAMESPACE
-    namespace Ui { class rounded_rectangle; }
-    QT_END_NAMESPACE
-
-    class rounded_rectangle : public QWidget {
+namespace tianli
+{
+    class rounded_rectangle : public QWidget
+    {
         Q_OBJECT
 
     public:
@@ -21,8 +20,8 @@ namespace tianli {
         ~rounded_rectangle() override;
 
     private:
-        Ui::rounded_rectangle *ui;
+        Ui::rounded_rectangle ui;
     };
 } // tianli
 
-#endif //TIANLI_INSTALLER_ROUNDED_RECTANGLE_H
+#endif // TIANLI_INSTALLER_ROUNDED_RECTANGLE_H
