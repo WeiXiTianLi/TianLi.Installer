@@ -12,7 +12,8 @@ int main(int argc, char *argv[])
     }
 #if 1
     if (auto res = tianli::core::download("http://download.weixitianli.com/d/TianLiUpdateService/cvAutoTrack/cvAutoTrack-7.11.1.zip", std::filesystem::path("./test_download.zip"), [](int a, int b)
-                                          { std::cout << a << " " << b << std::endl; });
+                                          { std::cout << a << " " << b << std::endl; }, [](bool success)
+                                          { std::cout << "download success: " << success << std::endl; });
         res.has_value())
     {
         std::cout << "download failed: " << *res << std::endl;

@@ -1,6 +1,6 @@
 #include "decompression.h"
 
-//#include <zlib.h>
+// #include <zlib.h>
 #include "unzip.h"
 
 #define _used_unz64
@@ -9,20 +9,20 @@ namespace tianli
 {
     namespace core
     {
-        std::optional<std::string> decompression(std::filesystem::path file, std::filesystem::path target_dir, std::function<void(int, int)> progress)
+        std::optional<std::string> decompression(std::filesystem::path file, std::filesystem::path target_dir, std::function<void(int, int)> progress, std::function<void(bool)> result)
         {
+            auto ret_error = [&](std::string_view error) -> std::optional<std::string> {
+                if (result) result(false);
+                return error.data();
+            };
+
             if (!std::filesystem::exists(file))
-            {
-                return "file not exists";
-            }
+                return ret_error("file not exists");
             if (!std::filesystem::exists(target_dir))
-            {
                 std::filesystem::create_directories(target_dir);
-            }
             if (file.extension() != ".zip")
-            {
-                return  "file extension not .zip";
-            }
+                return ret_error("file extension not .zip");
+
 #ifdef _used_unz64
             // zlib 解压缩 zip
             auto file_name = file.string();
@@ -30,25 +30,23 @@ namespace tianli
 
             unzFile uf = unzOpen64(file_name.c_str());
             if (uf == NULL)
-            {
-                return "unzOpen64 failed";
-            }
+                return ret_error("unzOpen64 failed");
             unz_global_info64 gi;
             if (unzGetGlobalInfo64(uf, &gi) != UNZ_OK)
             {
                 unzClose(uf);
-                return "unzGetGlobalInfo64 failed";
+                return ret_error("unzGetGlobalInfo64 failed");
             }
             unsigned long i;
             int all_size = 0;
-            for(i = 0; i < gi.number_entry; ++i)
+            for (i = 0; i < gi.number_entry; ++i)
             {
                 unz_file_info64 file_info;
                 char filename[256];
                 if (unzGetCurrentFileInfo64(uf, &file_info, filename, sizeof(filename), NULL, 0, NULL, 0) != UNZ_OK)
                 {
                     unzClose(uf);
-                    return "unzGetCurrentFileInfo64 failed";
+                    return ret_error("call all_size unzGetCurrentFileInfo64 failed");
                 }
                 all_size += file_info.uncompressed_size;
                 unzGoToNextFile(uf);
@@ -62,13 +60,13 @@ namespace tianli
                 if (unzGetCurrentFileInfo64(uf, &file_info, filename, sizeof(filename), NULL, 0, NULL, 0) != UNZ_OK)
                 {
                     unzClose(uf);
-                    return "unzGetCurrentFileInfo64 failed";
+                    return ret_error("call unzGetCurrentFileInfo64 failed");
                 }
                 auto unz_open_current_file_res = unzOpenCurrentFile(uf);
                 if (unz_open_current_file_res != UNZ_OK)
                 {
                     unzClose(uf);
-                    return std::string("unzOpenCurrentFile failed: ") + filename + " " + std::to_string(unz_open_current_file_res);
+                    return ret_error(std::string("unzOpenCurrentFile failed: ") + filename + " " + std::to_string(unz_open_current_file_res));
                 }
 
                 std::filesystem::path file_path = target_dir / filename;
@@ -112,7 +110,8 @@ namespace tianli
                 return std::nullopt;
             }
 #endif
-
+            if (result)
+                result(true);
             return std::nullopt;
         }
     } // namespace core

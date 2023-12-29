@@ -10,7 +10,7 @@ namespace tianli
 {
     namespace core
     {
-        std::optional<std::string> download(std::string_view url, std::filesystem::path file, std::function<void(int, int)> progress)
+        std::optional<std::string> download(std::string_view url, std::filesystem::path file, std::function<void(int, int)> progress, std::function<void(bool)> result)
         {
             auto dir = file.parent_path();
             if (!std::filesystem::exists(dir))
@@ -25,7 +25,8 @@ namespace tianli
 
             auto progress_callback = [&](__int64 downloadTotal, __int64 downloadNow, __int64 uploadTotal, __int64 uploadNow, intptr_t userdata) -> bool
             {
-                progress(downloadNow, downloadTotal);
+                if (progress)
+                    progress(downloadNow, downloadTotal);
                 return true;
             };
 
@@ -35,12 +36,15 @@ namespace tianli
 
             if (res.status_code != 200)
             {
+                if (result) result(false);
                 return std::string("download failed: ") + std::to_string(res.status_code) + " " + res.error.message;
             }
 
             std::ofstream file_stream(file, std::ios::binary);
             file_stream.write(res.text.data(), res.text.size());
             file_stream.close();
+
+            if (result) result(true);
             return  std::nullopt;
         }
     } // namespace core

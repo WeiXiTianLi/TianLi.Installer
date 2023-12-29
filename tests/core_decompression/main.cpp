@@ -15,7 +15,8 @@ int main(int argc, char *argv[])
     auto zip = "./test.zip";
     auto dir = "./unzip";
     if (auto res = tianli::core::decompression(std::filesystem::path(zip), std::filesystem::path(dir), [](int a, int b)
-                                               { std::cout << a << " " << b << std::endl; });
+                                               { std::cout << a << " " << b << std::endl; }, [](bool success)
+                                               { std::cout << "decompression success: " << success << std::endl; });
         res.has_value())
     {
         std::cout << "decompression failed: " << *res << std::endl;
