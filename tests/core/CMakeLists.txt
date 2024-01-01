@@ -1,0 +1,23 @@
+get_filename_component(dir_name ${CMAKE_CURRENT_SOURCE_DIR} NAME)
+set(test_name test_${dir_name})
+add_executable(${test_name} main.cpp)
+
+target_include_directories(${test_name} PRIVATE ${TianLiCoreDir})
+
+if(MSVC)
+    set_property(TARGET ${test_name} PROPERTY  MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+    target_compile_options(${test_name} PRIVATE "/W2")
+else()
+    target_compile_options(${test_name} PRIVATE "-Wall" "-Wextra" "-Wpedantic" )
+endif()
+string(REPLACE "_" ";" test_name_splits ${test_name})
+list(GET test_name_splits 1 test_group_name)
+set_target_properties(${test_name} PROPERTIES FOLDER "tests/${test_group_name}")
+target_link_libraries(${test_name} tianli::core)
+
+add_test(NAME ${test_name} COMMAND ${test_name} "./test.zip" "./unzip")
+# copy test.zip to bin
+add_custom_command(TARGET ${test_name} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+    ${CMAKE_CURRENT_SOURCE_DIR}/test.zip
+    $<TARGET_FILE_DIR:${test_name}>/test.zip)
