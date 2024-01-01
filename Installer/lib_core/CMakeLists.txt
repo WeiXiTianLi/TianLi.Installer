@@ -26,6 +26,8 @@ target_include_directories(core PRIVATE core_install)
 target_include_directories(core PRIVATE core_registration)
 
 target_sources(core
+    PUBLIC
+        installer.core.h
     PRIVATE
         installer.core.cpp
 )
