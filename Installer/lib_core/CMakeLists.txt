@@ -13,6 +13,10 @@ if (MSVC)
     add_compile_options("/utf-8")
     # 设置编译运行时为静态链接
     set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+    #  /NODEFAULTLIB:library
+    # if (CMAKE_BUILD_TYPE STREQUAL "Release")
+    #     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:MSVCRT")
+    # endif()
 endif ()
 
 add_subdirectory(core_decompression)
@@ -24,6 +28,8 @@ target_include_directories(core PRIVATE core_decompression)
 target_include_directories(core PRIVATE core_download)
 target_include_directories(core PRIVATE core_install)
 target_include_directories(core PRIVATE core_registration)
+
+target_compile_definitions(core PRIVATE EXPORT_CORE)
 
 target_sources(core
     PUBLIC
