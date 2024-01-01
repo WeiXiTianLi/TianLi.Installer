@@ -3,9 +3,11 @@
 #include <vector>
 #include <string>
 #include <map>
+#include <memory>
 #ifdef INSTALLER_UI_SUPPORT
 #include <tianli_window.h>
 #endif
+#include <installer.core.h>
 
 int print(std::vector<std::string> &arg)
 {
@@ -31,12 +33,41 @@ int main_window(int argc, char *argv[])
 
 int main_quiet_install(int argc, char *argv[])
 {
-    std::vector<std::string> args;
-    for (int i = 0; i < argc; ++i)
+    // std::vector<std::string> args;
+    // for (int i = 0; i < argc; ++i)
+    // {
+    //     args.push_back(argv[i]);
+    // }
+    // return print(args);
+
+    if (argc < 4)
     {
-        args.push_back(argv[i]);
+        std::vector<std::string> arg = {
+            "Usage: ",
+            "  -q, --quiet <files_dir> <install_dir>"};
+        print(arg);
+        return 1;
     }
-    return print(args);
+
+    std::string files_dir = argv[2];
+    std::string install_dir = argv[3];
+
+    std::cout << "files_dir: " << files_dir << std::endl;
+    std::cout << "install_dir: " << install_dir << std::endl;
+
+    std::cout << "download: " << std::endl;
+
+    std::shared_ptr<tianli_error> result(tianli_error::create(), tianli_error::destroy);
+
+    auto error_status = download("", "", nullptr, nullptr, result.get());
+    if (error_status == false)
+    {
+        std::cout << "download error: " << result->message << std::endl;
+        return result->code;
+    }
+
+    std::cout << "decompression: " << std::endl;
+    return 0;
 }
 
 int main_help()
