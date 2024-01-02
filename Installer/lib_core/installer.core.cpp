@@ -4,6 +4,8 @@
 #include <install.h>
 #include <registration.h>
 
+#include <cstring>
+
 namespace tianli
 {
     std::optional<std::string> download(std::string_view url, std::filesystem::path file, std::function<void(int, int)> progress, std::function<void(bool)> result)
@@ -35,7 +37,7 @@ void tianli_error::destroy(tianli_error *error)
     error = nullptr;
 }
 
-bool download(char *url, char *file, void (*progress)(int, int), void (*result)(bool), tianli_error *error)
+bool download(const char  *url, const char  *file, void (*progress)(int, int), void (*result)(bool), tianli_error *error)
 {
     if (auto res = tianli::download(url, file, progress, result); res.has_value())
     {
@@ -52,7 +54,7 @@ bool download(char *url, char *file, void (*progress)(int, int), void (*result)(
     return true;
 }
 
-// EXPORT bool download(char *url, char *file, void (*progress)(int, int), void (*result)(bool), tianli_error *error);
-// EXPORT bool decompression(char *file, char *target_dir, void (*progress)(int, int), void (*result)(bool), tianli_error *error);
-// EXPORT bool install(char *files_dir, char *install_dir, void (*progress)(int, int), tianli_error *error);
-// EXPORT bool registration(char *key, char *value, tianli_error *error);
+// EXPORT bool download(const char  *url, const char  *file, void (*progress)(int, int), void (*result)(bool), tianli_error *error);
+// EXPORT bool decompression(const char  *file, const char  *target_dir, void (*progress)(int, int), void (*result)(bool), tianli_error *error);
+// EXPORT bool install(const char  *files_dir, const char  *install_dir, void (*progress)(int, int), tianli_error *error);
+// EXPORT bool registration(const char  *key, const char  *value, tianli_error *error);

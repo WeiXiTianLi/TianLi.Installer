@@ -15,15 +15,19 @@
 // } // namespace tianli
 // #endif
 
+#ifdef __WIN32
 #ifdef EXPORT_CORE
 #define EXPORT __declspec(dllexport)
 #else
 #define EXPORT __declspec(dllimport)
 #endif
+#else
+#define EXPORT
+#endif
 
 extern "C"
 {
-    struct EXPORT tianli_error
+    EXPORT struct tianli_error
     {
         int code = 0;
         char *message = nullptr;
@@ -32,8 +36,8 @@ extern "C"
         static void destroy(tianli_error *error);
     };
 
-    EXPORT bool download(char *url, char *file, void (*progress)(int, int), void (*result)(bool), tianli_error *error);
-    EXPORT bool decompression(char *file, char *target_dir, void (*progress)(int, int), void (*result)(bool), tianli_error *error);
-    EXPORT bool install(char *files_dir, char *install_dir, void (*progress)(int, int), tianli_error *error);
-    EXPORT bool registration(char *key, char *value, tianli_error *error);
+    EXPORT bool download(const char *url, const char  *file, void (*progress)(int, int), void (*result)(bool), tianli_error *error);
+    EXPORT bool decompression(const char  *file, const char  *target_dir, void (*progress)(int, int), void (*result)(bool), tianli_error *error);
+    EXPORT bool install(const char  *files_dir, const char  *install_dir, void (*progress)(int, int), tianli_error *error);
+    EXPORT bool registration(const char  *key, const char  *value, tianli_error *error);
 }
