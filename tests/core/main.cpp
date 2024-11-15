@@ -14,14 +14,14 @@ int main(int argc, char *argv[])
     std::cout << "DEBUG" << std::endl;
     auto zip = "./test.zip";
     auto dir = "./unzip";
-    if (auto res = tianli::decompression(
-            std::filesystem::path(zip), std::filesystem::path(dir), [](int a, int b)
+    tianli_error err;
+    if (decompression(
+            std::filesystem::path(zip).string().c_str(), std::filesystem::path(dir).string().c_str(), +[](int a, int b)
             { std::cout << a << " " << b << std::endl; },
-            [](bool success)
-            { std::cout << "decompression success: " << success << std::endl; });
-        res.has_value())
+            +[](bool success)
+            { std::cout << "decompression success: " << success << std::endl; }, &err))
     {
-        std::cout << "decompression failed: " << *res << std::endl;
+        std::cout << "decompression failed: " << err.message << std::endl;
     }
     else
     {

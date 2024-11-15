@@ -5,8 +5,11 @@ include(FetchContent)
 set(MZ_FETCH_LIBS ON)
 set(MZ_LZMA OFF)
 set(MZ_ZSTD OFF)
-FetchContent_Declare(minizip GIT_REPOSITORY https://github.com/GengGode/minizip-ng
-    GIT_TAG        develop)
+set(MZ_BUILD_TEST OFF)
+set(ZLIB_ENABLE_TESTS OFF)
+set(ZLIB_TAG develop)
+FetchContent_Declare(minizip GIT_REPOSITORY https://github.com/zlib-ng/minizip-ng
+    GIT_TAG        master)
 FetchContent_MakeAvailable(minizip)
 set_property(TARGET bzip2 PROPERTY POSITION_INDEPENDENT_CODE ON)
 
